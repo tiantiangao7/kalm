@@ -1,2 +1,1 @@
-# kalm
-Knowledge Acquisition Logic Machine
+# Knowledge Acquisition Logic Machine (KALM)
