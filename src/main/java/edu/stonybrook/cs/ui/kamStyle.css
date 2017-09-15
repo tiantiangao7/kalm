@@ -1,0 +1,24 @@
+.combo-box{
+    -fx-background-color: transparent;
+    -fx-text-alignment: center;
+}
+
+.list-cell{
+    -fx-text-alignment: center;
+}
+
+
+.combo-box-popup{
+    -fx-background-color: transparent;
+    -fx-text-alignment: center;
+}
+
+
+.arrow, .arrow-button{
+    -fx-background-color: transparent;
+}
+
+#parsingresulttext {
+    -fx-font: 15px serif;
+    -fx-fill: red;
+}
