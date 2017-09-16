@@ -11,3 +11,7 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 4. APE Clex under GPL licence (http://attempto.ifi.uzh.ch/site/downloads/files/)
 5. BabelNet Java API. (http://babelnet.org/download)
 6. BabelNet knowledge base (http://babelnet.org/download)
+
+# Code
+* src/
+* scripts/
