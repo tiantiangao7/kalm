@@ -7,7 +7,7 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 # Requirements
 1. Java 1.8
 2. XSB Prolog (http://xsb.sourceforge.net/)
-3. ACE Parsing Engine (APE) under LGPL licence (https://github.com/Attempto/APE)
+3. XSB Prolog version of ACE Parsing Engine (APE) (included in the source code)
 4. APE Clex under GPL licence (http://attempto.ifi.uzh.ch/site/downloads/files/)
 5. BabelNet Java API. (http://babelnet.org/download)
 6. BabelNet knowledge base (http://babelnet.org/download)
