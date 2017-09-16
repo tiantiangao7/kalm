@@ -13,5 +13,7 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 6. BabelNet knowledge base (http://babelnet.org/download)
 
 # Code
-*   src/
-*   scripts/
+* `src/` Java source code for UI, semantic score computation, meta data deserialization for frame property/semantic link override/semantic score parameters/candidate parse results.
+* `scripts/` XSB Prolog code for APE engine + candidate frame parses
+* `bin/'  
+
