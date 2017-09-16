@@ -12,8 +12,8 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 5. BabelNet 3.7.1 Java API. (http://babelnet.org/download)
 6. BabelNet 3.7 indices (http://babelnet.org/download)
 
-# Pre-Installation
-1. BabelNet 3.7 indices (local copy). User must request access from http://babelnet.org/download.
+# Installation
+1. BabelNet 3.7 indices. User must request access from http://babelnet.org/download.
 2. XSB Prolog.
 
 # Code
