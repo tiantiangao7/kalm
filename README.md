@@ -9,8 +9,12 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 2. XSB Prolog (http://xsb.sourceforge.net/)
 3. XSB Prolog version of ACE Parsing Engine (APE) under LGPL licence (included in the source code)
 4. APE Clex under GPL licence (http://attempto.ifi.uzh.ch/site/downloads/files/)
-5. BabelNet Java API. (http://babelnet.org/download)
-6. BabelNet knowledge base (http://babelnet.org/download)
+5. BabelNet 3.7.1 Java API. (http://babelnet.org/download)
+6. BabelNet 3.7 indices (http://babelnet.org/download)
+
+# Pre-Installation
+1. BabelNet 3.7 indices (local copy). User must request access from http://babelnet.org/download.
+2. XSB Prolog.
 
 # Code
 * `src/` Java source code for UI, semantic score computation, meta data deserialization for frame property/semantic link override/semantic score parameters/candidate parse results.
