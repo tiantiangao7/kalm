@@ -13,5 +13,5 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 6. BabelNet knowledge base (http://babelnet.org/download)
 
 # Code
-* src/
-* scripts/
+* 'src/'
+* 'scripts/'
