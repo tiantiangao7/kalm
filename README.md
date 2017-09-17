@@ -24,3 +24,9 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 * `lib/` BabelNet lib files (please download from BabelNet website specified in requirement section)
 * `resources/jlt` BabelNet resources files (please download from BabelNet website specified in requirement section)
 * `resources/wnplusplus` BabelNet resources files (please download from BabelNet website specified in requirement section)
+
+# Run
+1. UI
+  `./start.sh`
+2. Bach Processing
+  `./runbatch.sh`
