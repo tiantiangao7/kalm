@@ -24,7 +24,7 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 * `lib/` BabelNet lib files (please download from BabelNet website specified in requirement section).
 * `resources/jlt/` BabelNet resources files (please download from BabelNet website specified in requirement section).
 * `resources/wnplusplus/` BabelNet resources files (please download from BabelNet website specified in requirement section).
-* `resources/batch/batch.txt` A collection of CNL sentences used for batch processing.
+* `resources/batch/batch.txt` A collection of CNL sentences used for batch processing. The default file is the test suite for the system.
 * `resources/scores/score.txt` The file containing the frame extraction results. For each sentences, it shows all of the extracted candidate parses with semantic scores, the disambiguated filler-word BabelNet synsets, and semantic paths connecting the filler word to the synset.
 * `resources/frame_property/frame_property.txt` The file containing the frame descriptions.
 * `resources/semantic_score_meta/` Files containing the weight bias scores, edge penalty scores, and overriden semantic links.
