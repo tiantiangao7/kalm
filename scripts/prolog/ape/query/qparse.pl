@@ -1,0 +1,1 @@
+?-parse_and_serialize('Mary is a female.').

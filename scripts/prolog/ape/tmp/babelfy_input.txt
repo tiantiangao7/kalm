@@ -1,0 +1,4 @@
+Mary=n=1
+work=v=2
+in=r=3
+school=n=5
