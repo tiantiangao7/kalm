@@ -27,7 +27,7 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 
 # Run
 1. GUI
-   `./start.sh`
+* `./start.sh`
   
 2. Bach Mode (Read sentences from file and serialize the frame extraction results into file)
-   `./runbatch.sh`
+* `./runbatch.sh`
