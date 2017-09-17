@@ -1,2 +1,0 @@
-semantic_link_override('bn:00081481n','hypernym','bn:00010073n').
-semantic_link_override('bn:00021045n','hypernym','bn:00034524n').
