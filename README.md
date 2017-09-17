@@ -18,12 +18,19 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 
 # Code
 * `src/` Java source code for UI, semantic score computation, meta data deserialization for frame property/semantic link override/semantic score parameters/candidate parse results.
-* `scripts/` XSB Prolog code for APE engine + candidate frame parses
-* `bin/` BabelNet bin files (please download from BabelNet website specified in requirement section)
-* `config/` BabelNet config files (please download from BabelNet website specified in requirement section)
-* `lib/` BabelNet lib files (please download from BabelNet website specified in requirement section)
-* `resources/jlt` BabelNet resources files (please download from BabelNet website specified in requirement section)
-* `resources/wnplusplus` BabelNet resources files (please download from BabelNet website specified in requirement section)
+* `scripts/` XSB Prolog code for APE engine + candidate frame parses.
+* `bin/` BabelNet bin files (please download from BabelNet website specified in requirement section).
+* `config/` BabelNet config files (please download from BabelNet website specified in requirement section).
+* `lib/` BabelNet lib files (please download from BabelNet website specified in requirement section).
+* `resources/jlt/` BabelNet resources files (please download from BabelNet website specified in requirement section).
+* `resources/wnplusplus/` BabelNet resources files (please download from BabelNet website specified in requirement section).
+* `resources/batch/batch.txt` A collection of CNL sentences used for batch processing.
+* `resources/scores/score.txt` The file containing the frame extraction results. For each sentences, it shows all of the extracted candidate parses with semantic scores, the disambiguated filler-word BabelNet synsets, and semantic paths connecting the filler word to the synset.
+* `resources/frame_property/frame_property.txt` The file containing the frame descriptions.
+* `resources/semantic_score_meta/` Files containing the weight bias scores, edge penalty scores, and overriden semantic links.
+* `runxsb.sh` The shell script for running XSB Prolog. User must specify the installation path to XSB Prolog.
+* `runbatch.sh` The shell script to process CNL sentences in batch mode.
+* `start.sh` The shell script to start the KALM system, the GUI.
 
 # Run
 1. GUI: `./start.sh`
