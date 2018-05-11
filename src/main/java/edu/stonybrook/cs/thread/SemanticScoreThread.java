@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Set;
 
@@ -12,6 +13,10 @@ public class SemanticScoreThread extends Thread
 	private String from = null;
 	private String[] toList = null;
 	private HashMap<String, Integer> toListMap = new HashMap<String, Integer>();
+	HashMap<String, Double> nodeScoreMap = new HashMap<String, Double>();
+	HashMap<Integer, EdgeNode> nodeMap = new HashMap<Integer, EdgeNode>();
+	PriorityQueue<EdgeNode> queue = 
+			new PriorityQueue<EdgeNode>(100, (a,b) -> (int)Math.ceil(b.curScore - a.curScore));
 	private String threadKey = null;
 	private String ancestorPath = "";
 	private double val = 0.0;
@@ -20,6 +25,7 @@ public class SemanticScoreThread extends Thread
 	private int depthLimit = 7;
 	private ArrayList<String> prohibitedEdgeList = null;
 	private String parameterKey = null;
+	private int id = 0;
 	
 	public SemanticScoreThread(String threadKey, int index, String s1, String[] s2,
 			ArrayList<String> prohibitedEdgeList)
@@ -39,23 +45,19 @@ public class SemanticScoreThread extends Thread
 	@Override
 	public void run() 
 	{
-		Set<String> set = new HashSet<String>();
-		HashMap<String, EdgeNode> nodeMap = new HashMap<String, EdgeNode>();
-		PriorityQueue<EdgeNode> queue = 
-				new PriorityQueue<EdgeNode>(100, (a,b) -> (int)Math.ceil(b.curScore - a.curScore));
-		
 		EdgeNode node = new EdgeNode();
 		node.edgeNodeSynsetID = from;
 		node.SemConnectionNum = BabelNetShareResource.GetSemanticConnectionNum(from);
-		nodeMap.put(from, node);
-		set.add(from);
+		node.nodeID = id;
+		id++;
+		nodeMap.put(node.nodeID, node);
 		queue.add(node);
 		
 		while (!queue.isEmpty()) {
 			EdgeNode parentNode = queue.poll();
 			double globalVal = BabelNetShareResource.getGlobalVal(threadKey); 
 			
-			if(parentNode.curScore < globalVal && parentNode.curScore > 0.00000001 )
+			if(parentNode.curScore < globalVal && parentNode.curScore > 0.00000001 && BabelNetShareResource.getPathLen(nodeMap, parentNode) > 2)
 			{
 				continue;
 			}
@@ -65,19 +67,23 @@ public class SemanticScoreThread extends Thread
 				assert targetNode.edgeNodeSynsetID != null;
 				assert targetNode.edgeWeight > 0.0;
 				assert targetNode.edgeType != null;
-				assert targetNode.parent != null;
-				assert parentNode.edgeNodeSynsetID.equals(targetNode.parent);
+				assert targetNode.parent == -1;
+				assert targetNode.nodeID == -1;
+				
+				targetNode.parent = parentNode.nodeID;
+				targetNode.nodeID = id;
+				id++;
 				
 				globalVal = BabelNetShareResource.getGlobalVal(threadKey);
-				if (set.contains(targetNode.edgeNodeSynsetID) || targetNode.edgeNodeSynsetID.equals("bn:02248101n")
+				if (targetNode.edgeNodeSynsetID.equals(from) || targetNode.edgeNodeSynsetID.equals("bn:02248101n")
 						|| IsProhibitedEdge(targetNode.edgeType)) 
 				{
 					continue;
 				} 
 				else if (toListMap.containsKey(targetNode.edgeNodeSynsetID)) 
 				{
-					targetNode.totalWeightedCount = nodeMap.get(parentNode.edgeNodeSynsetID).SemConnectionNum
-							* targetNode.edgeWeight + nodeMap.get(parentNode.edgeNodeSynsetID).totalWeightedCount;
+					targetNode.totalWeightedCount = nodeMap.get(parentNode.nodeID).SemConnectionNum
+							* targetNode.edgeWeight + nodeMap.get(parentNode.nodeID).totalWeightedCount;
 					ArrayList<String> path = BabelNetShareResource.getPath(nodeMap, targetNode);
 					targetNode.curScore = BabelNetShareResource.computeSemanticScore(parameterKey, targetNode.totalWeightedCount, path);
 					String tmpAncestorPath = BabelNetShareResource.printPath(nodeMap, targetNode);
@@ -92,16 +98,29 @@ public class SemanticScoreThread extends Thread
 				{
 					targetNode.SemConnectionNum = 
 							BabelNetShareResource.GetSemanticConnectionNum(targetNode.edgeNodeSynsetID);
-					targetNode.totalWeightedCount = nodeMap.get(parentNode.edgeNodeSynsetID).SemConnectionNum
-							* targetNode.edgeWeight + nodeMap.get(parentNode.edgeNodeSynsetID).totalWeightedCount;
+					targetNode.totalWeightedCount = nodeMap.get(parentNode.nodeID).SemConnectionNum
+							* targetNode.edgeWeight + nodeMap.get(parentNode.nodeID).totalWeightedCount;
 					ArrayList<String> path = BabelNetShareResource.getPath(nodeMap, targetNode);
 					targetNode.curScore = BabelNetShareResource.computeSemanticScore(parameterKey, targetNode.totalWeightedCount, path);
-					if (targetNode.curScore >= globalVal && targetNode.curScore > cutOffVal &&
-							path.size() < depthLimit)
-					{
-						queue.add(targetNode);
-						set.add(targetNode.edgeNodeSynsetID);
-						nodeMap.put(targetNode.edgeNodeSynsetID, targetNode);
+					if ((targetNode.curScore >= globalVal && targetNode.curScore > cutOffVal &&
+							path.size() < depthLimit) || (BabelNetShareResource.getPathLen(nodeMap, targetNode) <= 2))
+					{						
+						if(nodeScoreMap.containsKey(targetNode.edgeNodeSynsetID))
+						{
+							Double tempScore = nodeScoreMap.get(targetNode.edgeNodeSynsetID);
+							if(tempScore < targetNode.curScore)
+							{
+								queue.add(targetNode);
+								nodeScoreMap.put(targetNode.edgeNodeSynsetID, targetNode.curScore);
+								nodeMap.put(targetNode.nodeID, targetNode);
+							}
+						}
+						else
+						{
+							queue.add(targetNode);
+							nodeScoreMap.put(targetNode.edgeNodeSynsetID, targetNode.curScore);
+							nodeMap.put(targetNode.nodeID, targetNode);
+						}
 					}
 				}
 			}

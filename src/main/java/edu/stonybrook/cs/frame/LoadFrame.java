@@ -40,6 +40,10 @@ public class LoadFrame {
 					{
 						fe.setDataType(dataType);
 					}
+					else if(dataType.equals("Currency"))
+					{
+						fe.setDataType(dataType);
+					}
 				}
 			}
 			String[] prohibitedEdgeList = propPredicate.GetProhibitedEdgeList();

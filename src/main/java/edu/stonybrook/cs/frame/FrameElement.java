@@ -5,8 +5,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.List;
 import it.uniroma1.lcl.babelnet.BabelSynset;
+import main.java.edu.stonybrook.cs.fpparser.SynsetOverride;
 import main.java.edu.stonybrook.cs.thread.BabelNetCache;
 import main.java.edu.stonybrook.cs.thread.BabelNetShareResource;
 import main.java.edu.stonybrook.cs.thread.InverseSemanticScoreThread;
@@ -19,6 +21,8 @@ public class FrameElement {
 	private String FENameBabelSynsetGloss;
 	private String FEVal;
 	private String FEValPos;
+	private String FEValWordIndex;
+	private String FEValQuantity;
 	private String FEValBabelSynsetID;
 	private String FEValBabelSynsetGloss;
 	private Double FEValBabelSynsetScore;
@@ -26,12 +30,15 @@ public class FrameElement {
 	private List<String> FEValBabelSynsetIDList;
 	private List<String> FEValBabelSynsetGlossList;
 	private List<Tuple> tupleList;
+	private List<Tuple> exactMatchTupleList;
 	private String DataType; 
 	private Hashtable<String,String> synsetToGloss = new Hashtable<String,String>();
 	private Hashtable<String,Double> synsetToScore = new Hashtable<String,Double>();
 	private Hashtable<String,String> synsetToPath = new Hashtable<String,String>();
 	private Hashtable<String, Integer> FENameBabelSynsetIDMap = new Hashtable<String,Integer>();
 	private ArrayList<String> prohibitedEdgeList;
+	private boolean hasExactMatch;
+	private double defaulAffinityScore = 1.2;
 	
 	static class Tuple{
 		public String synsetID = null;
@@ -45,6 +52,8 @@ public class FrameElement {
 		this.FENameBabelSynsetIDList = FENameBabelSynsetIDList; 
 		this.FEVal = null;
 		this.FEValPos = null;
+		this.FEValWordIndex = null;
+		this.FEValQuantity = null;
 		this.FEValBabelSynsetID = null;
 		this.FEValBabelSynsetGloss = null;
 		this.FEValBabelSynsetScore = 0.0;
@@ -55,7 +64,9 @@ public class FrameElement {
 		this.DataType = null;
 		this.FrameElementKey = null;
 		this.tupleList = new ArrayList<Tuple>();
+		this.exactMatchTupleList = new ArrayList<Tuple>();
 		this.prohibitedEdgeList = null;
+		this.hasExactMatch = false;
 		
 		for(String sid : FENameBabelSynsetIDList)
 		{
@@ -82,39 +93,56 @@ public class FrameElement {
 	
 	public List<Thread> createSematicScoreComputationThreads()
 	{
-		// To-do: 1) check if there is no requirement to compute the semantic score for a FE Val
-		//        2) return if one of the synsets related to FE equals the FE synset
-		if(checkInteger(FEVal) && DataType == null)
+		if(FEVal.equals("what"))
 		{
-			FEValBabelSynsetIDList.add(FEVal);
-			FEValBabelSynsetGlossList.add("an integer");
-			synsetToScore.put(FEVal, 0.0);
-			synsetToGloss.put(FEVal, "an integer");
-			synsetToPath.put(FEVal, "");
+			FEValBabelSynsetIDList.add("variable");
+			FEValBabelSynsetGlossList.add("a variable");
+			synsetToScore.put("variable", 1.0);
+			synsetToGloss.put("variable", "a variable");
+			synsetToPath.put("variable", "");
 			return null;
 		}
 		
-		if(checkInteger(FEVal) && DataType != null && DataType.equals("Integer"))
+		if(DataType != null && DataType.equals("Integer"))
 		{
-			FEValBabelSynsetIDList.add(FEVal);
+			FEValBabelSynsetIDList.add("integer");
 			FEValBabelSynsetGlossList.add("an integer");
-			synsetToScore.put(FEVal, 1.0);
-			synsetToGloss.put(FEVal, "an integer");
-			synsetToPath.put(FEVal, "");
+			synsetToScore.put("integer", defaulAffinityScore);
+			synsetToGloss.put("integer", "an integer");
+			synsetToPath.put("integer", "");
+			return null;
+		}
+		
+		if(DataType != null && DataType.equals("Currency"))
+		{
+			FEValBabelSynsetIDList.add("currency");
+			FEValBabelSynsetGlossList.add("some currency");
+			synsetToScore.put("currency", defaulAffinityScore);
+			synsetToGloss.put("currency", "some currency");
+			synsetToPath.put("currency", "");
 			return null;
 		}
 		
 		List<BabelSynset> FEValBabelSynsetList = GetBabelNetQueryResult();
 		boolean hasGivenName = false;
 		for(BabelSynset bs : FEValBabelSynsetList)
-		{
-			if(!hasGivenName && BabelNetConnector.isGivenName(bs))
-			{
-				hasGivenName = true;
-			}
-			
+		{			
 			String synsetID = bs.getId().getID();
 			String gloss = BabelNetConnector.getMainGloss(bs);
+			
+			if(SynsetOverride.isSynsetOverridden(FEVal + "-" + synsetID))
+			{
+				continue;
+			}
+			
+			if(!hasGivenName && BabelNetConnector.isGivenName(bs))
+			{
+				if(FEValPos.equals("a") || FEValPos.equals("ne"))
+				{
+					hasGivenName = true;
+				}
+			}
+			
 			if(gloss != null && gloss.length() != 0)
 			{
 				if(bs.isKeyConcept())
@@ -158,9 +186,20 @@ public class FrameElement {
 			tupleList.add(tuple);			
 		}
 		
-		if(IsFEValMatchFEName(tupleList))
+		RemoveExactMatch();
+		
+		if(tupleList.size() == 0 && hasExactMatch)
 		{
-			tupleList.clear();
+			return null;
+		}
+		
+		if(tupleList.size() == 0 && !hasExactMatch)
+		{
+			FEValBabelSynsetIDList.add(FEVal);
+			FEValBabelSynsetGlossList.add("not found");
+			synsetToScore.put(FEVal, 0.0);
+			synsetToGloss.put(FEVal, "not found");
+			synsetToPath.put(FEVal, "");
 			return null;
 		}
 		
@@ -191,6 +230,13 @@ public class FrameElement {
 	
 	private List<BabelSynset> GetBabelNetQueryResult()
 	{
+		if(FEVal.equals("who") || FEVal.equals("where"))
+		{
+			List<BabelSynset> FEValBabelSynsetList = 
+					BabelNetConnector.getBabelNetSynsetsForQuery(FEVal);
+			return FEValBabelSynsetList;
+		}
+		
 		if(FEValPos.equals("a"))
 		{
 			List<BabelSynset> FEValBabelSynsetList = 
@@ -256,6 +302,54 @@ public class FrameElement {
 		}
 	}
 	
+	private void RemoveExactMatch()
+	{
+		if(FEVal.equals("who")||FEVal.equals("where"))
+		{
+			assert tupleList.size() == 2;
+			for(Tuple tuple : tupleList)
+			{
+				if(FENameBabelSynsetIDMap.containsKey(tuple.synsetID))
+				{
+					hasExactMatch = true;
+					exactMatchTupleList.add(tuple);
+				}
+			}
+			if(hasExactMatch)
+			{
+				tupleList.clear();
+			}
+			return;
+		}
+		
+		Iterator<Tuple> tupleListIterator = tupleList.iterator();
+		while (tupleListIterator.hasNext()) {
+		    Tuple element = tupleListIterator.next();
+		    if(FENameBabelSynsetIDMap.containsKey(element.synsetID))
+		    {
+		    	hasExactMatch = true;
+		    	tupleListIterator.remove();
+		    	exactMatchTupleList.add(element);
+		    }
+		}
+	}
+	
+	public boolean ExistExactMatch()
+	{
+		return hasExactMatch;
+	}
+	
+	public void SetExactMatch(double score)
+	{
+		for(Tuple tuple : exactMatchTupleList)
+		{
+			FEValBabelSynsetIDList.add(0,tuple.synsetID);
+			FEValBabelSynsetGlossList.add(0,tuple.gloss);
+			synsetToScore.put(tuple.synsetID, score);
+			synsetToPath.put(tuple.synsetID, "");
+		}
+	}
+	
 	private boolean IsFEValMatchFEName(List<Tuple> tupleList)
 	{
 		boolean isMatched = false;
@@ -266,7 +360,7 @@ public class FrameElement {
 				isMatched = true;
 				FEValBabelSynsetIDList.add(tuple.synsetID);
 				FEValBabelSynsetGlossList.add(tuple.gloss);
-				synsetToScore.put(tuple.synsetID, 1.0);
+				synsetToScore.put(tuple.synsetID, defaulAffinityScore);
 				synsetToPath.put(tuple.synsetID, "");
 				break;
 			}
@@ -291,10 +385,12 @@ public class FrameElement {
 		}
 	}
 	
-	public void setFEVal(String FEVal, String FEValPos)
-	{
+	public void setFEVal(String FEVal, String FEValWordIndex, String FEValPos, String FEValQuantity)
+	{	
 		this.FEVal = FEVal;
 		this.FEValPos = FEValPos;
+		this.FEValWordIndex = FEValWordIndex;
+		this.FEValQuantity = FEValQuantity;
 		String temp = "";
 		for(String sid : FENameBabelSynsetIDList)
 		{
@@ -316,6 +412,16 @@ public class FrameElement {
 	public String getFEVal()
 	{
 		return FEVal;
+	}
+	
+	public String getFEValWordIndex()
+	{
+		return FEValWordIndex;
+	}
+	
+	public String getFEValQuantity()
+	{
+		return FEValQuantity;
 	}
 	
 	public String getFENameBabelSynsetID()
@@ -398,6 +504,28 @@ public class FrameElement {
 					+ " " + synsetToScore.get(synset) + "\n";
 			}
 		}
+		return s;
+	}
+	
+	public String getTopResult()
+	{
+		if(FEValBabelSynsetIDList.size() == 0)
+		{
+			return null;
+		}
+		
+		String synsetSet = "'" + FEValBabelSynsetIDList.get(0) + "'";
+		Double score = synsetToScore.get(FEValBabelSynsetIDList.get(0));
+		for(int i = 1; i < FEValBabelSynsetIDList.size(); i++)
+		{
+			String synset = FEValBabelSynsetIDList.get(i);
+			if(Double.toString(synsetToScore.get(synset)).equals(Double.toString(score)))
+			{
+				synsetSet += "/'" + synset + "'";
+			}
+		}			
+		String s = "triple('" + FEName + "','" + FEVal + "'," + synsetSet + ")";
+		
 		return s;
 	}
 }

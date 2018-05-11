@@ -34,7 +34,7 @@ public class SemanticLinkOverride {
 	
 	private static void ParseSemanticLinkOverridePredicate(String input)
 	{
-	     Matcher m = Pattern.compile("^semantic_link_override\\(\\'(.+)\\',\\'(.+)\\',\\'(.+)\\'\\).$").matcher(input);
+	     Matcher m = Pattern.compile("^semantic_link_override\\(\\'(.+)\\',\\'(.+)\\',\\'(.+)\\'\\)\\.$").matcher(input);
 	     while(m.find()) {	    	 
 	    	 overrideSet.add(m.group(1) + "-" + m.group(2) + "-" + m.group(3));      
 	     }	       	       

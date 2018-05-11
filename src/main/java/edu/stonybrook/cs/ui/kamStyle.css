@@ -22,3 +22,7 @@
     -fx-font: 15px serif;
     -fx-fill: red;
 }
+
+#ulrresulttext {
+    -fx-font: 18px serif;
+}

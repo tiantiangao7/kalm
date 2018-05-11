@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javafx.application.Application;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -32,6 +34,7 @@ import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.Tooltip;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
@@ -39,19 +42,26 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import main.java.edu.stonybrook.cs.fpparser.FrameDescriptionPredicate;
+import main.java.edu.stonybrook.cs.fpparser.SemanticLinkAddition;
 import main.java.edu.stonybrook.cs.fpparser.SemanticLinkOverride;
 import main.java.edu.stonybrook.cs.fpparser.SemanticScoreParameters;
+import main.java.edu.stonybrook.cs.fpparser.SynsetOverride;
 import main.java.edu.stonybrook.cs.frame.Frame;
 import main.java.edu.stonybrook.cs.frame.FrameElement;
 import main.java.edu.stonybrook.cs.frameextraction.FrameExtractor;
+import main.java.edu.stonybrook.cs.query.QueryProcessing;
 import main.java.edu.stonybrook.cs.util.PrologConnector;
 
 public class KAM extends Application {
+	private Text ulrResult = new Text("");
+	
 	@Override
 	public void start(Stage stage) {
 		FrameDescriptionPredicate.Parse();
 		SemanticLinkOverride.initialize();
 		SemanticScoreParameters.initialize();
+		SynsetOverride.initialize();
+		SemanticLinkAddition.initialize();
 
 		TextArea textArea = new TextArea();
 		VBox vbox = new VBox();
@@ -77,6 +87,11 @@ public class KAM extends Application {
 		v2.setAlignment(Pos.TOP_LEFT);
 		v2.getChildren().add(parsingResult);
 		
+		ulrResult.setId("ulrresulttext");
+		VBox v3 = new VBox();
+		v3.setAlignment(Pos.TOP_LEFT);
+		v3.getChildren().add(ulrResult);
+		
 		TabPane tabPane = new TabPane();
 		
 		ObservableList<String> sentenceData = FXCollections.observableArrayList();
@@ -94,11 +109,21 @@ public class KAM extends Application {
 			tabPane.getTabs().clear();
 			parsingResult.setText("");
 			sentenceData.clear();
-		
+			ulrResult.setText("");
+			
 			if(sentence.length() != 0)
 			{
-				setSentenceParsingQuery(sentence);
+				QueryProcessing.ClearVarWordIndexSet();
+				if(QueryProcessing.IsQuery(sentence))
+				{
+					QueryProcessing.PreProcessQuery(sentence);
+				}
+				setSentenceParsingQuery(sentence.replace("$", ""));
 				PrologConnector.ExecutePrologQuery();
+				if(QueryProcessing.IsQuery(sentence))
+				{
+					QueryProcessing.ExtractImplicitVar();
+				}
 				String result = getParsingError();
 				if(result != null)
 				{
@@ -119,8 +144,8 @@ public class KAM extends Application {
 				parsingResult.setText("    Empty input!");
 			}
 		});
-
-		vbox.getChildren().addAll(textArea, hbox, v2, sentenceTable, tabPane);
+		
+		vbox.getChildren().addAll(textArea, hbox, v2, sentenceTable, tabPane, v3);
 		Scene scene = new Scene(vbox, 1100, primaryScreenBounds.getHeight());
 		scene.getStylesheets().add("main/java/edu/stonybrook/cs/ui/kamStyle.css");
 		stage.setTitle("Knowledge Acquisition Machine");
@@ -186,6 +211,10 @@ public class KAM extends Application {
 										Label affinityScore = new Label();
 										final ComboBox<String> synsetComboBox;										
 										if (item.getFEVal() != null) {
+											if(!item.getFEValQuantity().equals("1")&&!item.getFEValQuantity().equals("unknown"))
+											{
+												feVal.setText(item.getFEValQuantity() + " " + item.getFEVal());
+											}											
 											synsetComboBox = new ComboBox<>();
 											synsetComboBox.getStyleClass().add("combo-box");
 											synsetComboBox.getStyleClass().add("combo-box-popup");
@@ -224,8 +253,8 @@ public class KAM extends Application {
 															Double tempScore = item.getFEAffinityScore(newSynsetID);
 															item.changeFEValBabelSynsetID(newSynsetID);
 															Frame tempFrame = data.get(rowIndex);
-															tempFrame.resetScore();
-															System.out.println(tempFrame.getScore());
+															tempFrame.resetFrameScore();
+															System.out.println(tempFrame.getFrameScoreStr());
 															affinityScore.setText(String.format("%.3f",tempScore));
 															System.out.println("Value is: " + newSynsetID);
 															table.refresh();
@@ -260,13 +289,22 @@ public class KAM extends Application {
 		TableColumn<Frame, String> scoreCol = new TableColumn<Frame, String>("Score");
 		scoreCol.setCellValueFactory(new Callback<CellDataFeatures<Frame, String>, ObservableValue<String>>() {
 		     public ObservableValue<String> call(CellDataFeatures<Frame, String> param) {
-		         return new ReadOnlyObjectWrapper(param.getValue().getScore());
+		         return new ReadOnlyObjectWrapper(param.getValue().getFrameScoreStr());
 		     }
 		  });
 		scoreCol.setStyle("-fx-alignment: CENTER;");
 		scoreCol.setPrefWidth(150);
 		table.getColumns().add(scoreCol);
 		table.setItems(data);
+		table.setOnMouseClicked((MouseEvent event) -> {
+		    if (event.getClickCount() >= 1) {
+		    	Frame selectedFrame = table.getSelectionModel().getSelectedItem();
+		    	if(selectedFrame != null)
+		    	{
+		    		ulrResult.setText(selectedFrame.getULR());
+		    	}
+		    }
+		});
 		newTab.setContent(table);
 		tabPane.getTabs().add(newTab);
 		return newTab;
@@ -327,6 +365,7 @@ public class KAM extends Application {
             if (sentenceTable.getSelectionModel().getSelectedItem() != null) 
             {
             	tabPane.getTabs().clear();
+            	ulrResult.setText("");
             	int index =  sentenceTable.getSelectionModel().getSelectedIndex() + 1;
             	setFrameExtractionQuery(index);
             	PrologConnector.ExecutePrologQuery();
@@ -346,6 +385,8 @@ public class KAM extends Application {
     				}
     			}
             	serializeScore(null, elapsedTime, frameList, false);
+            	serializeTopResult(null, frameList, false);
+            	serializeTopResultWithRankOnly(null, frameList, false);
             }
         });
 	}
@@ -385,17 +426,87 @@ public class KAM extends Application {
 		}
 	}
 	
+	private void serializeTopResult(String sentence, ArrayList<Frame> frameList, boolean isAppend)
+	{
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("resources/scores/result.pl", isAppend))) 
+		{
+			if(sentence != null)
+			{
+				for(Frame frame : frameList)
+			    {
+			    	bw.write("result('" + sentence.replace("'", "\\'") + "',");
+			    	bw.write(frame.getTopResult());
+			    	bw.write(").\n");
+			    }
+			}
+			else
+			{
+				for(Frame frame : frameList)
+			    {
+			    	bw.write("result(");
+			    	bw.write(frame.getTopResult());
+			    	bw.write(").\n");
+			    }
+			}
+		}
+		catch (IOException x) 
+		{
+		      System.err.println(x);
+		}
+	}
+	
+	private void serializeTopResultWithRankOnly(String sentence, ArrayList<Frame> frameList, boolean isAppend)
+	{
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("resources/scores/result_rank.pl", isAppend))) 
+		{
+			int count = 0;
+			if(sentence != null)
+			{
+				for(Frame frame : frameList)
+			    {
+					count++;
+			    	bw.write("result('" + sentence.replace("'", "\\'") + "',");
+			    	bw.write(frame.getTopResultWithoutScore() + count);
+			    	bw.write(").\n");
+			    }
+			}
+			else
+			{
+				for(Frame frame : frameList)
+			    {
+					count++;
+			    	bw.write("result(");
+			    	bw.write(frame.getTopResultWithoutScore() + count);
+			    	bw.write(").\n");
+			    }
+			}
+		}
+		catch (IOException x) 
+		{
+		      System.err.println(x);
+		}
+	}
+	
 	private void batchProcessing()
 	{
-		try (BufferedReader br = new BufferedReader(new FileReader("resources/batch/batch.txt"))) 
+		try (BufferedReader br = new BufferedReader(new FileReader("resources/batch/batch_query.txt"))) 
 		{
 			int count = 0;
 			String sentence;
 			long totalElapsedTime = 0;
 			while((sentence = br.readLine())!=null)
 			{
-				setSentenceParsingQuery(sentence);
+				QueryProcessing.ClearVarWordIndexSet();
+				if(QueryProcessing.IsQuery(sentence))
+				{
+					QueryProcessing.PreProcessQuery(sentence);
+				}
+				setSentenceParsingQuery(sentence.replace("$", ""));
 				PrologConnector.ExecutePrologQuery();
+				if(QueryProcessing.IsQuery(sentence))
+				{
+					QueryProcessing.ExtractImplicitVar();
+				}
 				String result = getParsingError();
 				if(result == null)
 				{
@@ -411,10 +522,14 @@ public class KAM extends Application {
 	                if(count == 1)
 	                {
 	                	serializeScore(sentence, elapsedTime, frameList, false);
+	                	serializeTopResult(sentence, frameList, false);
+	                	serializeTopResultWithRankOnly(sentence, frameList, false);
 	                }
 	                else
 	                {
 	                	serializeScore(sentence, elapsedTime, frameList, true);
+	                	serializeTopResult(sentence, frameList, true);
+	                	serializeTopResultWithRankOnly(sentence, frameList, true);
 	                }
 				}
 			}

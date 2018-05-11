@@ -24,6 +24,29 @@ public class BabelNetConnector {
 	private static final int depthLimit = 13;
 	private static BabelNet bn = BabelNet.getInstance();
 	
+	public static List<BabelSynset> getBabelNetSynsetsForQuery(String word) {
+		List<BabelSynset> list = new ArrayList<BabelSynset>();
+		try {
+			if(word.equals("who"))
+			{
+				BabelSynset by1 = bn.getSynset(new BabelSynsetID("bn:00046516n"));
+				BabelSynset by2 = bn.getSynset(new BabelSynsetID("bn:00059480n"));
+				list.add(by1);
+				list.add(by2);
+			}
+			else if(word.equals("where"))
+			{
+				BabelSynset by1 = bn.getSynset(new BabelSynsetID("bn:00066884n"));
+				BabelSynset by2 = bn.getSynset(new BabelSynsetID("bn:15769800n"));
+				list.add(by1);
+				list.add(by2);
+			}
+		} catch (IOException | InvalidBabelSynsetIDException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	public static List<BabelSynset> getBabelNetSynsets(String word, String pos) {
 		List<BabelSynset> list = null;
 		try {

@@ -3,16 +3,14 @@ package main.java.edu.stonybrook.cs.thread;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
-
 import it.uniroma1.lcl.babelnet.BabelNet;
 import it.uniroma1.lcl.babelnet.BabelSynset;
 import it.uniroma1.lcl.babelnet.BabelSynsetID;
 import it.uniroma1.lcl.babelnet.BabelSynsetIDRelation;
 import it.uniroma1.lcl.babelnet.InvalidBabelSynsetIDException;
 import it.uniroma1.lcl.babelnet.data.BabelPointer;
+import main.java.edu.stonybrook.cs.fpparser.SemanticLinkAddition;
 import main.java.edu.stonybrook.cs.fpparser.SemanticLinkOverride;
 import main.java.edu.stonybrook.cs.fpparser.SemanticScoreParameters;
 
@@ -114,6 +112,8 @@ public class BabelNetShareResource {
 			ArrayList<EdgeNode> result = new ArrayList<EdgeNode>();
 			for(EdgeNode node : cachedEdgeNodeList)
 			{
+				assert node.nodeID == -1;
+				assert node.parent == -1;
 				EdgeNode tmpNode = new EdgeNode(node);
 				result.add(tmpNode);
 			}
@@ -151,11 +151,46 @@ public class BabelNetShareResource {
 						node.edgeNodeSynsetID = targetSID;
 						node.edgeWeight = weight;
 						node.edgeType = getEdgeType(edge.getPointer());
-						node.parent = s1;
+						assert node.nodeID == -1;
+						assert node.parent == -1;
 						nodeMap.put(targetSID, node);
 					}  
 				}    
 	        }
+			/*
+			if(s1.equals("bn:00019336n"))
+			{
+				EdgeNode node = new EdgeNode();
+				node.edgeNodeSynsetID = "bn:00056337n";
+				node.edgeWeight = 0.1;
+				node.edgeType = "hypernym";
+				node.parent = s1;
+				nodeMap.put("bn:00056337n", node);
+			}
+			*/
+			if(SemanticLinkAddition.HasAddedSemanticLinks(s1))
+			{
+				ArrayList<EdgeNode> addedLinkList = SemanticLinkAddition.GetAddedSemanticLinks(s1);
+				for(EdgeNode link : addedLinkList)
+				{
+					assert link.nodeID == -1;
+					assert link.parent == -1;
+					if(nodeMap.containsKey(link.edgeNodeSynsetID))
+					{
+						EdgeNode node = nodeMap.get(link.edgeNodeSynsetID);
+						if(link.edgeWeight > node.edgeWeight)
+						{
+							node.edgeWeight = link.edgeWeight;
+							node.edgeType = link.edgeType;
+						}
+					}
+					else
+					{	
+						EdgeNode node = new EdgeNode(link);
+						nodeMap.put(link.edgeNodeSynsetID, node);
+					} 
+				}
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (InvalidBabelSynsetIDException e) {
@@ -231,16 +266,16 @@ public class BabelNetShareResource {
 		return numerator/Math.pow(5.0, denominator);
 	}
 	
-	public static ArrayList<String> getPath(HashMap<String, EdgeNode> nodeMap, EdgeNode node)
+	public static ArrayList<String> getPath(HashMap<Integer, EdgeNode> nodeMap, EdgeNode node)
 	{
 		ArrayList<String> path = new ArrayList<String>();
 		path.add(node.edgeType);
-		String parent = node.parent;
+		int parent = node.parent;
 		
 		while(true)
 		{
 			EdgeNode tempNode = nodeMap.get(parent);
-			if(tempNode.parent == null)
+			if(tempNode.parent == -1)
 			{
 				break;
 			}
@@ -253,21 +288,46 @@ public class BabelNetShareResource {
 		return path;
 	}
 	
-	public static String printPath(HashMap<String, EdgeNode> nodeMap, EdgeNode node)
+	public static int getPathLen(HashMap<Integer, EdgeNode> nodeMap, EdgeNode node)
+	{
+		if(node.parent == -1)
+		{
+			return 0;
+		}
+		
+		int count = 0;
+		int parent = node.parent;	
+		while(true)
+		{
+			EdgeNode tempNode = nodeMap.get(parent);
+			count++;
+			if(tempNode.parent == -1)
+			{
+				break;
+			}
+			else
+			{
+				parent = tempNode.parent;
+			}
+		}
+		return count;
+	}
+	
+	public static String printPath(HashMap<Integer, EdgeNode> nodeMap, EdgeNode node)
 	{
 		String pathResult = "";
 		ArrayList<String> path = new ArrayList<String>();
 		path.add(node.edgeType);
-		String parent = node.parent;
-		System.out.print(node.edgeNodeSynsetID + ":" + node.totalWeightedCount + " ");
-		pathResult += node.edgeNodeSynsetID + ":" + node.totalWeightedCount;
+		int parent = node.parent;
+		System.out.print(node.edgeNodeSynsetID + ":" + node.curScore  + " ");
+		pathResult += node.edgeNodeSynsetID + ":" + node.curScore;
 		pathResult += "-" + node.edgeType + "-";
 		while(true)
 		{
 			EdgeNode tempNode = nodeMap.get(parent);
-			System.out.print(parent + ":" + tempNode.totalWeightedCount + " ");
-			pathResult += parent + ":" + tempNode.totalWeightedCount;
-			if(tempNode.parent == null)
+			System.out.print(tempNode.edgeNodeSynsetID + ":" + tempNode.curScore + " ");
+			pathResult += tempNode.edgeNodeSynsetID + ":" + tempNode.curScore;
+			if(tempNode.parent == -1)
 			{
 				break;
 			}
@@ -286,28 +346,5 @@ public class BabelNetShareResource {
 		}
 		System.out.print("\n");
 		return pathResult;
-	}
-	
-	public static String getInverseEdgeName(String edgeName)
-	{
-		if(edgeName.equals("hypernym"))
-		{
-			return "hyponym";
-		}
-		else if(edgeName.equals("hyponym"))
-		{
-			return "hypernym";
-		}
-		else if(edgeName.equals("holonym"))
-		{
-			return "meronym";
-		}
-		else if(edgeName.equals("meronym"))
-		{
-			return "holonym";
-		}
-		else {
-			return edgeName;
-		}
 	}
 }

@@ -6,14 +6,14 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
-
 import main.java.edu.stonybrook.cs.fpparser.FrameDescriptionPredicate;
+import main.java.edu.stonybrook.cs.fpparser.SemanticLinkAddition;
 import main.java.edu.stonybrook.cs.fpparser.SemanticLinkOverride;
 import main.java.edu.stonybrook.cs.fpparser.SemanticScoreParameters;
+import main.java.edu.stonybrook.cs.fpparser.SynsetOverride;
 import main.java.edu.stonybrook.cs.frame.Frame;
-import main.java.edu.stonybrook.cs.frame.FrameElement;
 import main.java.edu.stonybrook.cs.frameextraction.FrameExtractor;
+import main.java.edu.stonybrook.cs.query.QueryProcessing;
 import main.java.edu.stonybrook.cs.util.PrologConnector;
 
 public class Batch {
@@ -48,21 +48,10 @@ public class Batch {
 		}
 	}
 
-	private List<String> sentenceToList(String sentence) {
-		List<String> list = new ArrayList<String>();
-		String[] result = sentence.trim().split("\\.");
-		for (String sent : result) {
-			if (sent.length() != 0) {
-				list.add(sent.trim() + ".");
-			}
-		}
-		return list;
-	}
-
-	private void serializeScore(String sentence, long elapsedTime, ArrayList<Frame> frameList, boolean isAppend) {
+	private void serializeScore(int num, String sentence, long elapsedTime, ArrayList<Frame> frameList, boolean isAppend) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("resources/scores/score.txt", isAppend))) {
 			if (sentence != null) {
-				bw.write(sentence + " ");
+				bw.write(num + ". " + sentence + " ");
 			}
 			bw.write("(Total time(s): " + elapsedTime / 1000 + ")\n");
 			for (Frame frame : frameList) {
@@ -73,14 +62,84 @@ public class Batch {
 		}
 	}
 
+	private void serializeTopResult(String sentence, ArrayList<Frame> frameList, boolean isAppend)
+	{
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("resources/scores/result.pl", isAppend))) 
+		{
+			if(sentence != null)
+			{
+				for(Frame frame : frameList)
+			    {
+			    	bw.write("result('" + sentence.replace("'", "\\'") + "',");
+			    	bw.write(frame.getTopResult());
+			    	bw.write(").\n");
+			    }
+			}
+			else
+			{
+				for(Frame frame : frameList)
+			    {
+			    	bw.write("result(");
+			    	bw.write(frame.getTopResult());
+			    	bw.write(").\n");
+			    }
+			}
+		}
+		catch (IOException x) 
+		{
+		      System.err.println(x);
+		}
+	}
+	
+	private void serializeTopResultWithRankOnly(String sentence, ArrayList<Frame> frameList, boolean isAppend)
+	{
+		try (BufferedWriter bw = new BufferedWriter(new FileWriter("resources/scores/result_rank.pl", isAppend))) 
+		{
+			int count = 0;
+			if(sentence != null)
+			{
+				for(Frame frame : frameList)
+			    {
+					count++;
+			    	bw.write("result('" + sentence.replace("'", "\\'") + "',");
+			    	bw.write(frame.getTopResultWithoutScore() + count);
+			    	bw.write(").\n");
+			    }
+			}
+			else
+			{
+				for(Frame frame : frameList)
+			    {
+					count++;
+			    	bw.write("result(");
+			    	bw.write(frame.getTopResultWithoutScore() + count);
+			    	bw.write(").\n");
+			    }
+			}
+		}
+		catch (IOException x) 
+		{
+		      System.err.println(x);
+		}
+	}
+	
 	private void batchProcessing() {
-		try (BufferedReader br = new BufferedReader(new FileReader("resources/batch/batch.txt"))) {
+		try (BufferedReader br = new BufferedReader(new FileReader("resources/batch/batch_query.txt"))) {
 			int count = 0;
 			String sentence;
 			long totalElapsedTime = 0;
 			while ((sentence = br.readLine()) != null) {
-				setSentenceParsingQuery(sentence);
+				QueryProcessing.ClearVarWordIndexSet();
+				if(QueryProcessing.IsQuery(sentence))
+				{
+					QueryProcessing.PreProcessQuery(sentence);
+				}
+				setSentenceParsingQuery(sentence.replace("$", ""));
 				PrologConnector.ExecutePrologQuery();
+				if(QueryProcessing.IsQuery(sentence))
+				{
+					QueryProcessing.ExtractImplicitVar();
+				}
 				String result = getParsingError();
 				if (result == null) {
 					count++;
@@ -93,9 +152,13 @@ public class Batch {
 					long elapsedTime = stopTime - startTime;
 					totalElapsedTime += elapsedTime;
 					if (count == 1) {
-						serializeScore(sentence, elapsedTime, frameList, false);
+						serializeScore(count, sentence, elapsedTime, frameList, false);
+						serializeTopResult(sentence, frameList, false);
+						serializeTopResultWithRankOnly(sentence, frameList, false);
 					} else {
-						serializeScore(sentence, elapsedTime, frameList, true);
+						serializeScore(count, sentence, elapsedTime, frameList, true);
+						serializeTopResult(sentence, frameList, true);
+						serializeTopResultWithRankOnly(sentence, frameList, true);
 					}
 				}
 			}
@@ -110,6 +173,8 @@ public class Batch {
 		FrameDescriptionPredicate.Parse();
 		SemanticLinkOverride.initialize();
 		SemanticScoreParameters.initialize();
+		SynsetOverride.initialize();
+		SemanticLinkAddition.initialize();
 		b.batchProcessing();
 	}
 }

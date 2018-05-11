@@ -6,8 +6,9 @@ public class EdgeNode {
 	public String edgeType = null;
 	public Double totalWeightedCount = 0.0;
 	public Double SemConnectionNum = 0.0;
-	public String parent = null;
+	public int parent = -1;
 	public Double curScore = 0.0;
+	public int nodeID = -1;
 	
 	public EdgeNode(EdgeNode e)
 	{
