@@ -47,10 +47,9 @@ write_meta_pattern(pp_constraint(Preposition,PName),Stream,Counter,Counter2) :-
     write(Stream,'\n    '),
     write(Stream,'P'),
     write(Stream,Counter),
-    write(Stream,' = TempPredicate-_,\n'),
-    write(Stream,'    TempPredicate =.. [_,_,'),
+    write(Stream,' = modifier_pp(_,'),
     write(Stream,Preposition),
-    write(Stream,',_],'),
+    write(Stream,',_)-_,'),
     dependency_pair(PName,RName),
     write(Stream,'\n    '),
     write(Stream,RName),
@@ -113,4 +112,5 @@ dependency_pair('ladj->rel','get_rel_from_ladj').
 dependency_pair('radj->rel','get_rel_from_radj').
 dependency_pair('rel->ladj','get_ladj_from_rel').
 dependency_pair('rel->radj','get_radj_from_rel').
+dependency_pair('verb->rel','get_rel_from_verb').
 dependency_pair('self','get_self').    

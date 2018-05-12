@@ -21,7 +21,39 @@ Usage: get_predicate_type(+Predicate,-Type)
 get_predicate_type(Predicate,Type) :-
     Predicate = Main-_,
     Main =.. [Type|_].
-    
+
+/*
+Usage: check_pp_predicate(+Predicate,+PPWord)
+*/
+check_pp_predicate(modifier_pp(_,PPWord,_)-_,PPWord).
+
+check_pp_predicate(modifier_pp(_,loc,_)-_,in).
+check_pp_predicate(modifier_pp(_,loc,_)-_,at).
+check_pp_predicate(modifier_pp(_,loc,_)-_,on).
+check_pp_predicate(modifier_pp(_,loc,_)-_,under).
+check_pp_predicate(modifier_pp(_,loc,_)-_,within).
+check_pp_predicate(modifier_pp(_,loc,_)-_,to).
+check_pp_predicate(modifier_pp(_,loc,_)-_,toward).
+check_pp_predicate(modifier_pp(_,loc,_)-_,above).
+check_pp_predicate(modifier_pp(_,loc,_)-_,across).
+check_pp_predicate(modifier_pp(_,loc,_)-_,down).
+check_pp_predicate(modifier_pp(_,loc,_)-_,near).
+check_pp_predicate(modifier_pp(_,loc,_)-_,outside).
+check_pp_predicate(modifier_pp(_,loc,_)-_,upon).
+check_pp_predicate(modifier_pp(_,loc,_)-_,along).
+check_pp_predicate(modifier_pp(_,loc,_)-_,over).
+check_pp_predicate(modifier_pp(_,loc,_)-_,from).
+
+check_pp_predicate(modifier_pp(_,time,_)-_,in).
+check_pp_predicate(modifier_pp(_,time,_)-_,on).
+check_pp_predicate(modifier_pp(_,time,_)-_,near).
+check_pp_predicate(modifier_pp(_,time,_)-_,around).
+check_pp_predicate(modifier_pp(_,time,_)-_,until).
+check_pp_predicate(modifier_pp(_,time,_)-_,before).
+check_pp_predicate(modifier_pp(_,time,_)-_,after).
+check_pp_predicate(modifier_pp(_,time,_)-_,till).
+check_pp_predicate(modifier_pp(_,time,_)-_,from).
+
 /*
 Usage: reach(+DRSFacts,+I1,+I2,-PathList,-NodeList)
 */
@@ -91,6 +123,9 @@ get_dependency(DRSFacts,relation,P1,Arg,I2,['rel->lobject']) :-
     
 get_dependency(DRSFacts,relation,P1,Arg,I2,['rel->robject']) :-
     get_robject_from_rel(DRSFacts,P1,Arg,I2).
+
+get_dependency(DRSFacts,predicate,P1,Arg,I2,['verb->rel']) :-
+    get_rel_from_verb(DRSFacts,P1,Arg,I2).
     
 get_dependency(DRSFacts,object,P1,Arg,I2,['subject->verb']) :-
     get_verb_from_subject(DRSFacts,P1,Arg,I2).
@@ -258,6 +293,10 @@ get_rel_from_lobject(DRSFacts,object(V1,_,_,_,_,_)-_/_,V1,LObjectIndex) :-
 
 get_rel_from_robject(DRSFacts,object(V1,_,_,_,_,_)-_/_,V1,RObjectIndex) :-
     member(relation(_,of,V1)-RObjectIndex,DRSFacts).
+
+get_rel_from_verb(DRSFacts,VerbPredicate,Arg4,RelIndex) :-
+    get_arg4_from_verb_predicate(VerbPredicate,Arg4),
+    member(relation(Arg4,of,_)-RelIndex,DRSFacts).
 
 get_adj_from_pobject(DRSFacts,object(V1,_,_,_,_,_)-_/_,Arg1,AdjIndex) :-
     member(PropertyPredicate,DRSFacts),

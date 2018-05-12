@@ -1,4 +1,4 @@
-:- import append/3 from basics.
+:- import append/3,length/2 from basics.
 :- import numbervars/1 from num_vars.
 :- import concat_atom/2 from string.
 
@@ -41,7 +41,9 @@ fe_extractor_from_drs_facts(DRSFacts,TargetIndex,FrameTuple) :-
     lvp(Lexem,Type,FrameName,FE_Logical_Syntactic_Pattern_List),
     extract_fe_list_from_lvp(DRSFacts,TargetIndex,FE_Logical_Syntactic_Pattern_List,
     FEList),
-    FrameTuple = frame_tuple(FrameName,FEList).
+    FrameTuple = frame_tuple(FrameName,FEList),
+    length(FEList,Len),
+    Len > 1.
 
 fe_extractor(Sentence,TargetIndex,FrameTuple) :-
     acetext_to_drs(Sentence,_,_,drs(Refs,DRSFacts),_,_),
@@ -61,8 +63,8 @@ fe_extractor(Sentence,_,_) :-
     acetext_to_drs(Sentence,_,_,_,M,_),
     write(M).
 
-extract_fe_list_from_lvp(DRSFacts,TargetIndex,[pair(FEName,Logical_Syntactic_Pattern)|Rest],
-    FEList) :-
+extract_fe_list_from_lvp(DRSFacts,TargetIndex,[pair(FEName,Logical_Syntactic_Pattern,
+    Flag)|Rest],FEList) :-
     extract_fe_from_logical_syntactic_pattern(
     DRSFacts,TargetIndex,Logical_Syntactic_Pattern,FE,FEIndex,PredicateName),
     is_valid_fe_val(FEName,FE),
@@ -70,6 +72,10 @@ extract_fe_list_from_lvp(DRSFacts,TargetIndex,[pair(FEName,Logical_Syntactic_Pat
     extract_fe_list_from_lvp(DRSFacts,TargetIndex,Rest,RestFEList),
     \+ basics:memberchk(pair(_,_,FEIndex,_),RestFEList),
     append(L1,RestFEList,FEList).    
+
+extract_fe_list_from_lvp(DRSFacts,TargetIndex,[pair(FEName,Logical_Syntactic_Pattern,
+    optional)|Rest],FEList) :-
+    extract_fe_list_from_lvp(DRSFacts,TargetIndex,Rest,FEList).
 
 extract_fe_list_from_lvp(_,_,[],[]).
 
