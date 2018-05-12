@@ -1,81 +1,250 @@
 Mary is a female.
-Mary holds a a:female gender.
-Mary has a gender of a female. 
+Kate holds a a:female gender.
+Susan has a gender of a female.
+John is a male.
 Mary lives in a village.
-Mary lives in a town with John.
-Mary stays in London.
-Mary is a resident of New-York-City. 
-Mary is an occupant from London.
+Kate lives in a town with John.
+Susan is a resident of New-York-City. 
+Taylor-Swift lives in Nashville.
+Warren-Buffett stays in Omaha.
+John is inhabited in Tennessee.
 Mary rents a house from John.
 Mary leases an apartment from John.
-Mary charters a car.
+Kate charters a car.
+A student rents a textbook from a library.
+John rents a truck.
 Mary buys a laptop.
-Mary purchases a house.
-Mary buys a phone.
-Mary is a buyer of a store.
-Mary makes a purchase of a company.
+Kate purchases a house.
+Susan buys a phone.
+George is a buyer of a store.
+Kate makes a purchase of a company.
 Mary buys a meal for John.
-Mary purchases a bike from John.
+Mary purchases a motorcycle from John.
+Mary buys a motorcycle for a daughter for 300 dollars from Bob.
+Jane buys a house for John for a price of 300000 dollars from a friend.
 Mary owns a car.
-Mary is an owner of a company.
-Mary has a house.
-Mary possesses a store.
-Mary is a possessor of a bike.
-Mary is born in 1990.
-Mary is born in London.
-Mary is born in London in 1986.
+John is an owner of a farm.
+Kate is an owner of a shop.
+Susan has a house.
+Mary possesses a painting.
+John is a possessor of a factory.
+Michael-Jordan is born in 1963 in Brooklyn.
+Abraham-Lincoln is born in 1809 in Kentucky.
+Mozart is born in 1756 in Austria.
 Mary bakes a bread.
-Mary makes a burger in a kitchen.
-Mary makes a burger in a restaurant.
-Mary fries a fish.
-Mary roasts a duck.
+Kate makes a burger in a kitchen.
+Susan makes a burger in a restaurant.
+John fries a fish.
+Tom roasts a duck.
 Mary boils an egg.
-Mary makes an omelet.
+John makes an omelet.
 A cook makes an omelet.
-A chef makes an omelet.
+A chef makes an burger.
 John dresses in a suit.
-John wears a suit.
+Tom wears a jacket.
+Jack puts-on a n:Tshirt.
 Mary puts-on a skirt.
-Mary makes a trip from Boston to London.
-Mary commutes to London.
+Susan wears a blouse.
 Mary travels to New-York-City.
-Mary makes a journey from Boston to London.
-Mary makes a trip to China.
-Mary founds a company.
-Mary is a founder of a company in London. 
+John makes a trip to China.
+Kate makes a trip from Beijing to Shanghai.
+Susan commutes to Sydney.
+George makes a journey from Brazil to Chile.
+Larry-Page founds Google.
+Bill-Gates founds Microsoft.
+Mark-Zuckerberg is a founder of Facebook.
+Robin-Li is a founder of Baidu.
+John founds a foundation.
 Mary studies at Cambridge-University.
-Mary receives a n:bachelor-degree from Cambridge-University.
-Mary obtains a n:bachelor-degree in a n:Biology from Cambridge-University.
-Mary is a donor to a school.
-Mary endows a school with some money.
-Mary makes a donation of some money to a school. 
+John receives a n:bachelor-degree from Cambridge-University.
+Kate obtains a n:master-degree in a n:Biology from Harvard-University.
+Susan enters Peking-University.
+Tom graduates from MIT.
+Bill-Gates is a donor to Stanford-University.
+Bill-Gates endows Harvard-University with some money.
+Billy-Joel makes a donation of a piano to Stony-Brook-University.
+Steve-Jobs donates some money to a school.
 Mary is a daughter of John.
 Mary is married to John.
 Mary and John are married.
-Mary is at an age of 20.
-Mary is 20.
-Mary is under an age of 20.
-Mary gets a cold.
-Mary is diagnosed with a cancer.
-Mary suffers from a headache.
-Mary is infected with a virus.
-Mary resigns as a chairman.
-Mary quits a job.
-Mary steps-down as a CEO.
-Mary retires from a company.
-Mary is an n:italian.
-Mary has a a:british nationality.
-Mary is a n:New-Yorker.
-Mary is a christian.
-Steve is a n:buddhist.
-Mary works in London.
-Mary works in a company.
-Mary works as an actress.
-Mary has a job of a nurse. 
-Mary is a teacher.
+Kate is at an age of 20.
+Kate is 20.
+Kate is under an age of 20.
 Nobel-Prize-in-Physics is awarded to Albert-Enstein.
 Albert-Enstein is granted Nobel-Prize-in-Physics by Swedish-Academy.
 Albert-Enstein is given Nobel-Prize-in-Physics by Swedish-Academy.
+Turing-Award is given to Donald-Knuth by Association-for-Computing-Machinery.
+Emma-Stone is given a n:Oscar-Award by Academy-of-Motion-Picture-Arts-and-Sciences.
+Mary gets a cold.
+Kate is diagnosed with a cancer.
+John suffers from a headache.
+Susan is infected with a virus.
+Kate is diagnosed with a n:diabetes.
+Bill-Gates resigns as a chairman from Microsoft.
+Jeff-Immelt retires from GE.
+Steve-Ballmer steps-down as a CEO from Microsoft.
+Mary is an n:italian.
+John has a a:british nationality.
+Susan is a n:New-Yorker.
+Denise is a n:parisian.
+Mary is a christian.
+Steve is a n:buddhist.
+Mary has a job of a nurse. 
+Kate is a teacher.
+John works at IBM.
+Susan works as a singer.
+Tom works in Berlin.
 Mary works with John.
 Mary teams-up with John on a project.
 Mary is a partner of John.
+Mary dies in Italy.
+Kate dies in 1876.
+John dies-of a cancer.
+An orphan dies from some hunger.
+A soldier uses a gun.
+A laborer operates a machine.
+A technician utilizes a tool.
+Mary uses a phone.
+Syria applies a chemical weapon.
+A military's use of a nuclear weapon is against a law.
+Jack builds a house.
+A company of Hong-Kong constructs an airport.
+A government constructs a nuclear plant.
+John assembles a dresser.
+A laborer makes a construction of a new road.
+Squeaky-Fromme assassinates Gerald-Ford.
+A gunman kills 50 children.
+The army massacres some young women.
+Rachel is a killer of a policeman.
+A police arrests Jack for a murder.
+Harry is arrested by a police for a n:shoplifting.
+FBI apprehends an citizen for a n:treason.
+Madoff is under an arrest by a police for a fraud.
+EFCC arrests a governor on a charge of some corruption.
+US launches a strike against Libya.
+US-troops launches an assault on Benghazi.
+A rebel ambushes a soldier.
+A mysterious fighter attacks a guardsman.
+A gang assaults a young girl.
+Bill-Gates is a chairman of Gates-Foundation.
+King-Hussein rules Jordan.
+Xi-Jinping is a chief of Communist-Party-of-China.
+Larry-Page leads Google.
+Bill-de-Blasio is a governor of New-York-City.
+General-Motors is a manufacturer of some vehicles.
+Microsoft is a maker of some software.
+Nike produces some shoes.
+Pfizer is a producer of some drugs.
+Foxconn manufactures some n:smartphones.
+Puerto-Rico earns 1000000 dollars on a n:tourism.
+Warren-Buffett makes 1000000 dollars on an investment.
+Pfizer generates a revenue of 1000000 dollars on a healthcare.
+John has a monthly income of 3000 dollars.
+Amazon makes a revenue of 300000000 dollars on a n:Ecommerce.
+Roger-Federer beats Rafael-Nadal in US-Open.
+Donald-Trump defeats Hillary-Clinton in US-election.
+Amazon beats Walmart in a n:online-shopping.
+Brazil's defeat in World-Cup is unexpected.
+A doctor alleviates Jack's pain with a painkiller.
+A physician heals Jack with some antibiotics.
+A doctor treats a soldier with a n:chinese-medicine.
+A doctor cures Jack's n:stomachache with Aspirin.
+A hostage returns to US.
+Shinzo-Abe visits China.
+George approaches to a hospital.
+Donald-Trump comes to Texas after a hurricane.
+An arrival of a a:British army in Normandy marks a victory of a war.
+John exits Los-Angeles.
+John leaves a park.
+A military departs from Pearl-Harbor.
+An opponent escapes from Zimbabwe.
+Mary calls a police.
+John phones a senator.
+A company reaches a potential customer.
+Mary contacts an employer.
+John makes a call to his own girlfriend.
+A student protests against a government.
+A civilian demonstrates against Saddam-Hussein.
+A union makes a demonstration against a management of a company.
+Mary submits a form to IRS.
+A voter hands-in a ballot.
+A new employee files some paperwork.
+A correspondent turns-in a report to CNN.
+IBM files a patent to USPTO.
+Kate-Winslet co-stars with Leonardo-DiCaprio in Titanic.
+Kate co-stars with Leonardo in Titanic.
+John-Mills acts as a soldier in Dunkirk.
+John features a role of Hamlet in a new film.
+Marlon-Brando plays Vito-Corleone in The-Godfather.
+Zoe-Saldana appears in Avatar.
+Johnny-Depp stars Captain-Jack-Sparrow in Pirates-of-the-Caribbean.
+A police releases a protester.
+Nelson-Mandela is released from a prison.
+A prisoner is released from Iran.
+FBI releases a criminal.
+Eisenhower signs a treaty.
+John accedes to a contract.
+United-States signs Kyoto-protocol.
+A monarch accedes to a bill.
+UK accedes to a convention.
+John publishes a paper in Nature.
+John releases an article on a waltz.
+Donald-Knuth publishes a new book with MIT-press.
+Cambridge-Press releases a memoir of Winston-Churchill.
+Angelina-Jolie releases a new film in Netflix.
+Ernest-Hemingway publishes a new novel.
+John loses 4000 dollars on a n:gambling.
+A private investor loses some money.
+A n:hedge-fund has a loss of 3000000 dollars on a n:trading.
+An airline loses 3000000 dollars on an international service.
+Mary loses a wallet.
+A robber surrenders to a police.
+Japan surrenders to Allies.
+A protester gives-up to an authority.
+Chapo-Guzman surrenders to a prison on a charge of a n:smuggle.
+Mukhtar-Robow surrenders to a government.
+Mary writes a description of a frame.
+A senator drafts a letter.
+A student composes an essay.
+John types a manuscript.
+Malala-Yousafzai authors an autobiography.
+John snatches a watch from Mary.
+A thief steals a painting from a museum.
+John swipes some money from a passenger.
+A gang shoplifts a jewel from a shop.
+A spy embezzles some documents from an governor.
+John kicks-off some slippers.
+Mary peels-off a swimsuit.
+John removes a raincoat.
+Mary slips a blouse.
+John takes-off a scarf.
+Spain participates in World-Cup.
+A student engages in a workshop.
+A police is involved in a n:shooting.
+A buyer is engaged in an auction.
+A terrorist is involved in an explosion.
+A planter grows some wheat.
+Tom's grandfather raises some corns.
+Mary grows some vegetables.
+John grows some potatoes.
+A chef grows some carrots.
+Mary borrows a book from John.
+China lends some money to Venezuela.
+An army lends some equipment to an officer.
+Oxford-University lends a violin to a a:Syrian refugee.
+A seller borrows some shares from a company.
+Red-Lobster is a a:seafood restaurant.
+McDonalds is a a:burger restaurant.
+Curry-Club is an a:indian restaurant.
+Ippudo is a cheap and a:asian restaurant in New-York-City.
+Panda-Express is a cheap and a:chinese restaurant.
+China exports some coal to Japan.
+US imports some oil from Saudi-Arabia.
+Germany exports some automobiles to Korea.
+Russia exports some fighters to Iran.
+US imports some lambs from Australia.
+Mary schedules a meeting.
+John sets-up a dental appointment.
+John arranges a trip to Japan.
+Mary schedules an interview.
+Some students arrange a forum.

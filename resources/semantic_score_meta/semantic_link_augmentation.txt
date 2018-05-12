@@ -1,0 +1,2 @@
+semantic_link_augmentation('bn:00019336n','hypernym','bn:00056337n',0.1).
+semantic_link_augmentation('bn:00035649n','hypernym','bn:00035650n',0.5).

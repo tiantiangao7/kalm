@@ -1,0 +1,178 @@
+Kate's gender is what?
+John has which gender?
+What is Susan's gender?
+Mary has a gender of what?
+Where does Kate stay?
+John is a resident of which city?
+Which city does Warren-Buffett live in?
+Taylor-Swift stays in which city?
+Mary lives where?
+Which building does Susan live in?
+Kate rents what from who?
+John rents a textbook from who?
+Susan leases which apartment?
+Mary charters what?
+John rents a car from who?
+Does John buy a $car?
+What does Kate buy?
+How much money does Mary pay for a car?
+How many dollars does Mary pay for a watch?
+John buys a bike for who?
+George makes a purchase of what?
+Mary purchases a car from who?
+IBM is a buyer of which company?
+What does Kate own?
+John is an owner of what?
+Does Mary possess a $car?
+What does Susan have?
+Who owns a casino?
+When and where is Mary born?
+Mary is born in which city?
+Who makes a cake?
+John cooks what?
+Does Susan fry a $fish?
+What does John bake?
+What does Susan wear?
+John dresses in which suit?
+Mary wears what?
+Does Kelly wear a $dress?
+Where does John travel?
+Susan commutes to which city?
+Which city does Mary travel from?
+Kate makes a trip from Boston to which city?
+Who founds Microsoft?
+Who is the founder of Baidu?
+Who creates a n:startup-company?
+Which school does Mary study at?
+Mary studies what at Cambridge-University?
+Which degree does Kate obtain from Harvard-University?
+Which university does Tom graduate from?
+Bill-Gates donates what to which university?
+What does Billy-Joel donate to Stony-Brook-University?
+Who is a donor to Harvard-University?
+Who donates some money to Stanford-University?
+Who is Mary's daughter?
+Who is Mary married to?
+What is Kate's age?
+Kate is at an age of what?
+Nobel-Prize-in-Physics is awarded to who in 1990?
+Albert-Enstein is granted which award by Swedish-Academy?
+Who gives Albert-Enstein Nobel-Prize-in-Physics?
+Which award is given to Donald-Knuth by Association-for-Computing-Machinery?
+Emma-Stone is given a n:Oscar-Award by which institution?
+Kate is diagnosed with which disease?
+John suffers from which disease?
+Is Susan infected with a $virus?
+Bill-Gates resigns from which company?
+Who retires from GE?
+Who steps-down as a CEO from Microsoft?
+Does Steve-Jobs resign from a $company?
+What is Mary's nationality?
+Which nationality does John have?
+Who is a n:New-Yorker?
+What is Mary's religion?
+What is Mary's job?
+Mary has which job?
+Where does Kate work?
+Which company does Susan work at?
+Which position does Tom hold at IBM?
+John is employed by which company?
+Who does Mary work with?
+Mary teams-up with who on which project?
+Who is Mary's partner?
+Where does Mary die?
+When does Kate die?
+John dies from what?
+Does a soldier use a $gun?
+A technician utilizes which tool?
+Which phone does Mary use?
+Who uses a gun at a school?
+What does Jack build?
+Who constructs a nuclear plant?
+What does John assemble?
+Who assassinates Gerald-Ford?
+Who does Squeaky-Fromme assassinate?
+How many children does a gunman kill?
+Who is a killer of a policeman?
+Who arrests Jack?
+Harry is arrested by who for what?
+Who is under an arrest by a police for a fraud?
+US launches a strike against which country?
+A rebel ambushes who?
+Who attacks a guardsman?
+Who assaults a young girl?
+Who is a chairman of Gates-Foundation?
+Which country does King-Hussein rule?
+Who is a chief of Communist-Party-of-China?
+Who leads Google?
+Bill-de-Blasio is a head of which city?
+Which car does General-Motors produce?
+Who is a producer of some drugs?
+What does Foxconn manufacture?
+How much money does Puerto-Rico earn on a n:tourism?
+How much money does John make?
+Roger-Federer beats who in which competition?
+Who defeats Hillary-Clinton in US-election?
+A doctor alleviates Jack's pain with which medicine?
+Does a physician heal Jack with a $medicine?
+Who returns to US?
+Which country does Shinzo-Abe visit?
+Who approaches to a hospital?
+Where does Donald-Trump come after a hurricane?
+John exits which city?
+Where does a military depart?
+Who escapes from Zimbabwe?
+Who calls a police?
+John phones who?
+Who does Mary contact?
+Who does John make a call to?
+Who protests against a government?
+Who does Kate demonstrate against?
+Where does Mary submit a form?
+What does a voter hand-in?
+Who files what?
+Who co-stars with Leonardo-DiCaprio in Titanic?
+Kate co-stars with who in Titanic?
+John-Mills acts as which role in Dunkirk?
+Who plays Vito-Corleone in The-Godfather?
+Zoe-Saldana appears in which movie?
+Johnny-Depp plays which role in Pirates-of-the-Caribbean?
+A police releases who?
+Who is released from a prison?
+Where is a prisoner released?
+Who signs a treaty?
+Which protocol does United-States sign?
+In which journal does John publish a paper?
+John publishes a paper on which topic?
+Who publishes a new book?
+Cambridge-Press releases a memoir of who?
+Angelina-Jolie releases which movie in Netflix?
+Who releases an article?
+Who releases an article on a waltz?
+How many dollars does John lose on a n:gambling?
+Who loses a laptop?
+What does Mary lose?
+Who surrenders to a police?
+What does Mary write?
+Who drafts a letter?
+What does a student compose?
+What does John snatch from Mary?
+What does a thief steal from a museum?
+John swipes some money from who?
+Does Mary slip a $cloth?
+Who takes-off a scarf?
+Which country participates in World-Cup?
+John engages in which workshop?
+Which event is Mary engaged in?
+Who grows some wheat?
+What does Mary grow?
+What does Mary borrow from John?
+Mary borrows what from who?
+Which country lends some money to Venezuela?
+What does China export to Japan?
+US imports some oil from which country?
+Does Germany export some automobiles to a $country?
+Russia exports what to which country?
+Who sets-up a meeting?
+Who schedules an interview?
+Which event does Mary arrange?

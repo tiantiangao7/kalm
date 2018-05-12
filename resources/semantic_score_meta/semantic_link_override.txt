@@ -1,2 +1,22 @@
 semantic_link_override('bn:00081481n','hypernym','bn:00010073n').
 semantic_link_override('bn:00021045n','hypernym','bn:00034524n').
+semantic_link_override('bn:00012135n','Derivationally related form','bn:00074785n').
+semantic_link_override('bn:00021492n','hypernym','bn:00054416n').
+semantic_link_override('bn:15249425n','hypernym','bn:00046516n').
+semantic_link_override('bn:14785888n','hypernym','bn:00018369n').
+semantic_link_override('bn:00049910n','hypernym','bn:00044576n').
+semantic_link_override('bn:00078004n','hypernym','bn:00032645n').
+semantic_link_override('bn:03326757n','hypernym','bn:00056443n').
+semantic_link_override('bn:00552526n','hypernym','bn:00071734n').
+semantic_link_override('bn:03326757n','hypernym','bn:01217265n').
+semantic_link_override('bn:00057516n','hypernym','bn:00044967n').
+semantic_link_override('bn:00053801n','hypernym','bn:00019980n').
+semantic_link_override('bn:00053993n','hypernym','bn:00029546n').
+semantic_link_override('bn:00077386n','hypernym','bn:00019980n').
+semantic_link_override('bn:00077585n','hypernym','bn:14959529n').
+semantic_link_override('bn:01111471n','hypernym','bn:00005105n').
+semantic_link_override('bn:15460720n','hypernym','bn:00046516n').
+semantic_link_override('bn:15460720n','hypernym','bn:02965949n').
+semantic_link_override('bn:15769800n','hypernym','bn:00005442n').
+semantic_link_override('bn:15983992n','hypernym','bn:00005442n').
+semantic_link_override('bn:00051760n','hypernym','bn:00016325n').
