@@ -19,7 +19,7 @@ We propose an approach to knowledge authoring with the aim of endowing domain ex
 
 # Installation
 1. BabelNet 3.7 indices. User must request access from http://babelnet.org/download.
-2. XSB Prolog.
+2. XSB Prolog (http://xsb.sourceforge.net/).
 
 # Code
 * `src/` Java source code for UI, semantic score computation, meta data deserialization for frame property/semantic link override/semantic score parameters/candidate parse results.
