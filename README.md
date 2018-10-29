@@ -9,6 +9,10 @@ We propose an approach to knowledge authoring with the aim of endowing domain ex
 (d) A hybrid CNL-based language for authoring queries.
 (e) Both knowledge authoring and question answering parts achieve superior accuracy.
 
+# Academic papers (high-level description of the system)
+1. Knowledge Authoring for Rule-Based Reasoning. Tiantian Gao, Paul Fodor, Michael Kifer. ODBASE, OTM Conferences 2018: 461-480.  https://github.com/tiantiangao7/kalm/blob/master/docs/KALM_ODBASE18.pdf
+2. High Accuracy Question Answering via Hybrid Controlled Natural Language. Tiantian Gao, Paul Fodor, Michael Kifer. Web Intelligence (WI), 2018. https://github.com/tiantiangao7/kalm/blob/master/docs/QA_WI18.pdf
+
 # Requirements
 1. Java 1.8
 2. XSB Prolog (http://xsb.sourceforge.net/)
