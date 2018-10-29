@@ -14,7 +14,7 @@ The KALM system allows knowledge authoring with the aim of endowing domain exper
 2. High Accuracy Question Answering via Hybrid Controlled Natural Language. Tiantian Gao, Paul Fodor, Michael Kifer. Web Intelligence (WI), 2018. https://github.com/tiantiangao7/kalm/blob/master/docs/QA_WI18.pdf
 
 # Requirements
-1. Java 1.8
+1. Java JRE 1.8 or later (https://www.java.com/en/download/)
 2. XSB Prolog (http://xsb.sourceforge.net/)
 3. XSB Prolog version of Attempto Controlled English (ACE http://attempto.ifi.uzh.ch/site/) Parsing Engine (APE) under LGPL licence (included in this repository)
 4. APE Clex under GPL licence (http://attempto.ifi.uzh.ch/site/downloads/files/)
