@@ -2,17 +2,12 @@
 Authors: Tiantian Gao, Paul Fodor, Michael Kifer
 
 # Introduction
-The KALM system allows knowledge authoring with the aim of endowing domain experts with tools that would allow them to translate their knowledge into logic by means of a Controlled Natural Language (CNL). We also develop the query service to support question answering based on the authored knowledge. The contributions of this work are five-fold:
-
-(a) A formal, FrameNet-inspired ontology FrameOnt that formalizes FrameNet frames and integrates linguistic resources from BabelNet to represent the meaning of English sentences.
-
-(b) An incrementally-learned semantic parser that disambiguates CNL sentences by mapping semantically equivalent sentences into the same FrameOnt frames and assigns them unique logical representation (ULR). 
-
-(c) Explainability: the approach makes it possible to explain both why particular meanings are assigned and also why mistakes were made.
-
-(d) A hybrid CNL-based language for authoring queries.
-
-(e) Both knowledge authoring and question answering parts achieve superior accuracy.
+The KALM system allows knowledge authoring with the aim of endowing domain experts with tools that would allow them to translate their knowledge into logic by means of a Controlled Natural Language (CNL). We also develop the query service to support question answering based on the authored knowledge. The features of KALM are five-fold:
+a. A formal, FrameNet-inspired ontology FrameOnt that formalizes FrameNet frames and integrates linguistic resources from BabelNet to represent the meaning of English sentences.
+b. An incrementally-learned semantic parser that disambiguates CNL sentences by mapping semantically equivalent sentences into the same FrameOnt frames and assigns them unique logical representation (ULR). 
+c. Explainability: the approach makes it possible to explain both why particular meanings are assigned and also why mistakes were made.
+d. A hybrid CNL-based language for authoring queries.
+e. Both knowledge authoring and question answering parts achieve superior accuracy.
 
 # Academic papers (high-level description of the system)
 1. Knowledge Authoring for Rule-Based Reasoning. Tiantian Gao, Paul Fodor, Michael Kifer. ODBASE, OTM Conferences 2018: 461-480.  https://github.com/tiantiangao7/kalm/blob/master/docs/KALM_ODBASE18.pdf
