@@ -22,8 +22,8 @@ The KALM system allows knowledge authoring with the aim of endowing domain exper
 6. BabelNet 3.7 indices (http://babelnet.org/download)
 
 # Installation
-1. BabelNet 3.7 indices. User must request access from http://babelnet.org/download.
-2. XSB Prolog (http://xsb.sourceforge.net/).
+1. BabelNet 3.7 indices. User must request access from http://babelnet.org/download. The license of BabelNet 3.7 indices applies.
+2. XSB Prolog (http://xsb.sourceforge.net/). The license of XSB Prolog is GNU Library or Lesser General Public License version 2.0 (LGPLv2).
 
 # Code
 * `src/` Java source code for UI, semantic score computation, meta data deserialization for frame property/semantic link override/semantic score parameters/candidate parse results.
