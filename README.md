@@ -44,3 +44,6 @@ The KALM system allows knowledge authoring with the aim of endowing domain exper
 # Run
 1. GUI: `./start.sh`
 2. Bach Mode (Read sentences from file and serialize the frame extraction results into file): `./runbatch.sh`
+
+# License
+The license of the KALM code is BSD 3-Clause License.
