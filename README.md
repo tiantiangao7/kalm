@@ -2,7 +2,7 @@
 Authors: Tiantian Gao, Paul Fodor, Michael Kifer
 
 # Introduction
-KALM system allows knowledge authoring with the aim of endowing domain experts with tools that would allow them to translate their knowledge into logic by means of CNL. We also develop the query service to support question answering based on the authored knowledge. The contributions of this work are five-fold:
+The KALM system allows knowledge authoring with the aim of endowing domain experts with tools that would allow them to translate their knowledge into logic by means of a Controlled Natural Language (CNL). We also develop the query service to support question answering based on the authored knowledge. The contributions of this work are five-fold:
 (a) A formal, FrameNet-inspired ontology FrameOnt that formalizes FrameNet frames and integrates linguistic resources from BabelNet to represent the meaning of English sentences.
 (b) An incrementally-learned semantic parser that disambiguates CNL sentences by mapping semantically equivalent sentences into the same FrameOnt frames and assigns them unique logical representation (ULR). 
 (c) Explainability: the approach makes it possible to explain both why particular meanings are assigned and also why mistakes were made.
@@ -16,7 +16,7 @@ KALM system allows knowledge authoring with the aim of endowing domain experts w
 # Requirements
 1. Java 1.8
 2. XSB Prolog (http://xsb.sourceforge.net/)
-3. XSB Prolog version of ACE Parsing Engine (APE) under LGPL licence (included in this repository)
+3. XSB Prolog version of Attempto Controlled English (ACE http://attempto.ifi.uzh.ch/site/) Parsing Engine (APE) under LGPL licence (included in this repository)
 4. APE Clex under GPL licence (http://attempto.ifi.uzh.ch/site/downloads/files/)
 5. BabelNet 3.7.1 Java API. (http://babelnet.org/download)
 6. BabelNet 3.7 indices (http://babelnet.org/download)
