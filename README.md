@@ -50,7 +50,7 @@ The KALM system allows knowledge authoring with the aim of endowing domain exper
 2. Add a new frame at the end of the line. e.g., 
    `fp('Growing_food',[property('Grower',['bn:00046516n']),property('Food',['bn:00035650n','bn:00035649n'])]).` 
 
-# How to add compose an annotated sentence and learn a new lvp?
+# How to compose an annotated sentence and learn a new lvp?
 ```
 cd scripts/prolog/ape
 xsb
@@ -58,9 +58,13 @@ xsb
 ?-annotate_sentence('Mary has a job at IBM in London.',1/4,'Being_employed',[pair('Employee',1/1,required),pair('Position',1/4,required),pair('Employer',1/6,optional),pair('Place',1/8,optional)],[],LVP).
 ```
 
-# Run
-1. GUI: `./start.sh`
-2. Bach Mode (Read sentences from file and serialize the frame extraction results into file): `./runbatch.sh`
+# How to run the GUI
+1. Command line: `./start.sh`
+2. Start from Eclipse (recommended).
+
+# How to un the batch mode for testing?
+1. Command line: `./runbatch.sh`
+In batch mode, the program read sentences from file and then serialize the frame extraction results.
 
 # License
 The license of the KALM code is BSD 3-Clause License.
