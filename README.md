@@ -23,7 +23,8 @@ The KALM system allows knowledge authoring with the aim of endowing domain exper
 
 # Installation
 1. BabelNet 3.7 indices. User must request access from http://babelnet.org/download. The license of BabelNet 3.7 indices applies.
-2. XSB Prolog Version 3.7 (http://xsb.sourceforge.net/). The license of XSB Prolog is GNU Library or Lesser General Public License version 2.0 (LGPLv2).
+2. BabelNet 3.7.1 API (The installation guide comes with the package).
+3. XSB Prolog Version 3.7 (http://xsb.sourceforge.net/). The license of XSB Prolog is GNU Library or Lesser General Public License version 2.0 (LGPLv2).
 
 # Configuration
 1. Add the installation path to XSB Prolog to runxsb.sh.
