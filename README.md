@@ -45,6 +45,12 @@ The KALM system allows knowledge authoring with the aim of endowing domain exper
 * `runbatch.sh` The shell script to process CNL sentences in batch mode.
 * `start.sh` The shell script to start the KALM system, the GUI.
 
+# How to add a new frame?
+1. open `resources/frame_property/frame_property.txt`
+2. Add a new frame at the end of the line. e.g., 
+   fp('Growing_food',[property('Grower',['bn:00046516n']),property('Food',['bn:00035650n','bn:00035649n'])]). 
+
+
 # Run
 1. GUI: `./start.sh`
 2. Bach Mode (Read sentences from file and serialize the frame extraction results into file): `./runbatch.sh`
