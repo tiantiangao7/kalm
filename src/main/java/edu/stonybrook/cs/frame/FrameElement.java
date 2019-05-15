@@ -13,6 +13,7 @@ import main.java.edu.stonybrook.cs.thread.BabelNetCache;
 import main.java.edu.stonybrook.cs.thread.BabelNetShareResource;
 import main.java.edu.stonybrook.cs.thread.InverseSemanticScoreThread;
 import main.java.edu.stonybrook.cs.thread.SemanticScoreThread;
+import main.java.edu.stonybrook.cs.ui.KAM;
 import main.java.edu.stonybrook.cs.util.BabelNetConnector;
 
 public class FrameElement {
@@ -93,6 +94,15 @@ public class FrameElement {
 	
 	public List<Thread> createSematicScoreComputationThreads()
 	{
+		if (KAM.ontVal != null && KAM.ontVal.equals("MetaQA")) {
+			FEValBabelSynsetIDList.add("synset n/a");
+			FEValBabelSynsetGlossList.add("synset n/a");
+			synsetToScore.put("synset n/a", 1.0);
+			synsetToGloss.put("synset n/a", "synset n/a");
+			synsetToPath.put("synset n/a", "");
+			return null;
+		}
+		
 		if(FEVal.equals("what"))
 		{
 			FEValBabelSynsetIDList.add("variable");

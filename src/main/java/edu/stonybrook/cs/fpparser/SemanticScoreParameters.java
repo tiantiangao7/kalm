@@ -117,6 +117,7 @@ public class SemanticScoreParameters {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+			x.printStackTrace();
 		}
 	}
 }

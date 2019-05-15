@@ -54,6 +54,7 @@ import main.java.edu.stonybrook.cs.util.PrologConnector;
 
 public class KAM extends Application {
 	private Text ulrResult = new Text("");
+	public static String ontVal = "BabelNet";
 	
 	@Override
 	public void start(Stage stage) {
@@ -79,7 +80,19 @@ public class KAM extends Application {
 		batchButton.setMinWidth(150);
 		batchButton.setMinHeight(50);
 		
-		hbox.getChildren().addAll(button, batchButton);
+		ComboBox<String> ontology = new ComboBox<String>();
+		ontology.getItems().addAll("BabelNet",
+				"MetaQA");
+		ontology.setPromptText("BabelNet");
+		ontology.valueProperty().addListener(new ChangeListener<String>() {
+            @Override 
+            public void changed(ObservableValue<? extends String> ov, String t, String t1) {                
+                ontVal = t1;
+                System.out.println(ontVal);
+            }    
+        });
+		
+		hbox.getChildren().addAll(ontology, button, batchButton);
 
 		Text parsingResult = new Text("");
 		parsingResult.setId("parsingresulttext");;
@@ -96,8 +109,11 @@ public class KAM extends Application {
 		
 		ObservableList<String> sentenceData = FXCollections.observableArrayList();
 		TableView<String> sentenceTable = new TableView<String>(sentenceData);
+				
 		initSentenceTable(sentenceTable, sentenceData, primaryScreenBounds.getWidth() - 1, tabPane);
 		sentenceTable.setItems(sentenceData);
+
+		sentenceTable.setMaxHeight(200);
 
 		batchButton.setOnAction(action -> {
 			batchProcessing();
@@ -105,7 +121,7 @@ public class KAM extends Application {
 		
 		button.setOnAction(action -> {
 			String sentence = textArea.getText().trim();
-			textArea.setText("");
+			//textArea.setText("");
 			tabPane.getTabs().clear();
 			parsingResult.setText("");
 			sentenceData.clear();
@@ -143,12 +159,13 @@ public class KAM extends Application {
 			{
 				parsingResult.setText("    Empty input!");
 			}
+			System.out.println("Done");
 		});
 		
 		vbox.getChildren().addAll(textArea, hbox, v2, sentenceTable, tabPane, v3);
-		Scene scene = new Scene(vbox, 1100, primaryScreenBounds.getHeight());
+		Scene scene = new Scene(vbox, 1100, primaryScreenBounds.getHeight() - 200);
 		scene.getStylesheets().add("main/java/edu/stonybrook/cs/ui/kamStyle.css");
-		stage.setTitle("Knowledge Acquisition Machine");
+		stage.setTitle("Knowledge Acquisition Logic Machine");
 		stage.setScene(scene);
 		stage.show();
 	}
@@ -333,7 +350,7 @@ public class KAM extends Application {
 				new BufferedWriter(new FileWriter("scripts/prolog/ape/query/qparse.pl"))) 
 		{
 			String newSentence = sentence.replace("'", "\\'");
-			bw.write("?-parse_and_serialize('" + newSentence + "').");
+			bw.write("parse_and_serialize_main :- parse_and_serialize('" + newSentence + "').");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -344,13 +361,13 @@ public class KAM extends Application {
 		try (BufferedWriter bw = 
 				new BufferedWriter(new FileWriter("scripts/prolog/ape/query/qframe_extraction.pl"))) 
 		{
-			bw.write("?-extract_frame_and_serialize(" + index + ").");
+			bw.write("extract_frame_and_serialize_main :- extract_frame_and_serialize(" + index + ").");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void initSentenceTable(TableView<String> sentenceTable, ObservableList<String> sentenceData, double width, TabPane tabPane)
+	private void initSentenceTable(TableView<String> sentenceTable, ObservableList<String> sentenceData, double width, TabPane tabPane) //throws Exception
 	{
 		TableColumn<String, String> col = new TableColumn<String, String>();
 		col.setCellValueFactory(new Callback<CellDataFeatures<String, String>, ObservableValue<String>>() {
@@ -359,7 +376,7 @@ public class KAM extends Application {
 		     }
 		  });
 		col.setStyle("-fx-alignment: CENTER;");
-		col.setPrefWidth(width);
+		col.setPrefWidth(1100);
 		sentenceTable.getColumns().add(col);
 		sentenceTable.getSelectionModel().selectedItemProperty().addListener((observableValue, oldValue, newValue) -> {
             if (sentenceTable.getSelectionModel().getSelectedItem() != null) 
@@ -406,7 +423,7 @@ public class KAM extends Application {
 	}
 	
 	private void serializeScore(String sentence, long elapsedTime, ArrayList<Frame> frameList,
-			boolean isAppend)
+			boolean isAppend) //throws IOException
 	{
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("resources/scores/score.txt", isAppend))) 
 		{
@@ -423,10 +440,12 @@ public class KAM extends Application {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+		      x.printStackTrace();
+		      //throw x;
 		}
 	}
 	
-	private void serializeTopResult(String sentence, ArrayList<Frame> frameList, boolean isAppend)
+	private void serializeTopResult(String sentence, ArrayList<Frame> frameList, boolean isAppend) //throws IOException
 	{
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("resources/scores/result.pl", isAppend))) 
 		{
@@ -452,10 +471,12 @@ public class KAM extends Application {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+		      x.printStackTrace();
+		      //throw x;
 		}
 	}
 	
-	private void serializeTopResultWithRankOnly(String sentence, ArrayList<Frame> frameList, boolean isAppend)
+	private void serializeTopResultWithRankOnly(String sentence, ArrayList<Frame> frameList, boolean isAppend) //throws IOException
 	{
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("resources/scores/result_rank.pl", isAppend))) 
 		{
@@ -484,6 +505,8 @@ public class KAM extends Application {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+		      x.printStackTrace();
+		      //throw x;
 		}
 	}
 	
@@ -538,6 +561,7 @@ public class KAM extends Application {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+			x.printStackTrace();
 		}
 	}
 }

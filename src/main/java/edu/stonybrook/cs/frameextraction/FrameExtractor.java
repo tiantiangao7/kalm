@@ -13,7 +13,6 @@ import java.util.List;
 import main.java.edu.stonybrook.cs.frame.Frame;
 import main.java.edu.stonybrook.cs.frame.FrameElement;
 import main.java.edu.stonybrook.cs.frame.LoadFrame;
-import main.java.edu.stonybrook.cs.query.QueryProcessing;
 
 public class FrameExtractor {
 	private static String FEQueryInput = "scripts/prolog/ape/tmp/query.pl";
@@ -111,6 +110,7 @@ public class FrameExtractor {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+			x.printStackTrace();
 		}
 		catch (InterruptedException e) {
 			e.printStackTrace();
@@ -140,13 +140,6 @@ public class FrameExtractor {
 		    	 }
 		     }
 		});
-		
-		ArrayList<Integer> subsumedAnswerList = removeSubsumedFrames(frameList);
-		for(int i = subsumedAnswerList.size() - 1; i >= 0; i--)
-		{
-			int index = subsumedAnswerList.get(i);
-			frameList.remove(index);
-		}
 		return frameList;
 	}
 	
@@ -164,77 +157,5 @@ public class FrameExtractor {
 			}
 			frame.setCoefficientVal(1.0*frame.getNonEmptyFENum()/max);
 		}
-	}
-	
-	private static ArrayList<Integer> removeSubsumedFrames(ArrayList<Frame> frameList)
-	{
-		ArrayList<Integer> subsumedAnswerList = new ArrayList<Integer>();
-		for(int i = 0; i < frameList.size(); i++)
-		{
-			for(int j = 0; j < frameList.size(); j++)
-			{
-				if(i == j)
-				{
-					continue;
-				}
-				
-				Frame f1 = frameList.get(i);
-				Frame f2 = frameList.get(j);
-				if(!f1.getFrameName().equals(f2.getFrameName()))
-				{
-					continue;
-				}
-				ArrayList<FrameElement> l1 = f1.getAllFrameElements();
-				ArrayList<FrameElement> l2 = f2.getAllFrameElements();
-				assert l1.size() == l2.size();
-				boolean isSubsumed = true;
-				for(int k = 0; k < l1.size(); k++)
-				{
-					FrameElement fe1 = l1.get(k);
-					FrameElement fe2 = l2.get(k);
-					assert fe1.getFEName().equals(fe2.getFEName());
-					if(fe1.getFEVal() == null && fe2.getFEVal() == null)
-					{
-						continue;
-					}
-					if(fe1.getFEVal() == null || fe2.getFEVal() == null)
-					{
-						isSubsumed = false;
-						break;
-					}				
-					if(fe1.getFEVal().equals(fe2.getFEVal()))
-					{
-						if(QueryProcessing.IsInVarWordIndexSet(fe1.getFEValWordIndex())
-								&& !QueryProcessing.IsInVarWordIndexSet(fe2.getFEValWordIndex()))
-						{
-							isSubsumed = false;
-							break;
-						}
-						else
-						{
-							continue;
-						}
-					}
-					if(!fe1.getFEVal().equals(fe2.getFEVal()))
-					{
-						if(!QueryProcessing.IsInVarWordIndexSet(fe1.getFEValWordIndex())
-								&& QueryProcessing.IsInVarWordIndexSet(fe2.getFEValWordIndex()))
-						{
-							continue;
-						}
-						else
-						{
-							isSubsumed = false;
-							break;
-						}
-					}
-				}
-				if(isSubsumed == true)
-				{
-					subsumedAnswerList.add(i);
-				}
-			}
-		}		
-		return subsumedAnswerList;
 	}
 }

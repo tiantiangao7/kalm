@@ -65,6 +65,7 @@ public class SemanticLinkAddition {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+			x.printStackTrace();
 		}
 	}
 }

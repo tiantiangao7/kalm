@@ -51,6 +51,7 @@ public class SynsetOverride {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+			x.printStackTrace();
 		}
 	}
 }

@@ -34,7 +34,7 @@ public class Batch {
 	private void setSentenceParsingQuery(String sentence) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("scripts/prolog/ape/query/qparse.pl"))) {
 			String newSentence = sentence.replace("'", "\\'");
-			bw.write("?-parse_and_serialize('" + newSentence + "').");
+			bw.write("parse_and_serialize_main :- parse_and_serialize('" + newSentence + "').");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -42,7 +42,7 @@ public class Batch {
 
 	private void setFrameExtractionQuery(int index) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter("scripts/prolog/ape/query/qframe_extraction.pl"))) {
-			bw.write("?-extract_frame_and_serialize(" + index + ").");
+			bw.write("extract_frame_and_serialize_main :- extract_frame_and_serialize(" + index + ").");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -59,6 +59,7 @@ public class Batch {
 			}
 		} catch (IOException x) {
 			System.err.println(x);
+			x.printStackTrace();
 		}
 	}
 
@@ -88,6 +89,7 @@ public class Batch {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+			x.printStackTrace();
 		}
 	}
 	
@@ -120,6 +122,7 @@ public class Batch {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+			x.printStackTrace();
 		}
 	}
 	
@@ -165,6 +168,7 @@ public class Batch {
 			System.out.println("Total time (s): " + totalElapsedTime);
 		} catch (IOException x) {
 			System.err.println(x);
+			x.printStackTrace();
 		}
 	}
 	

@@ -53,6 +53,7 @@ public class SemanticLinkOverride {
 		catch (IOException x) 
 		{
 		      System.err.println(x);
+			x.printStackTrace();
 		}
 	}
 }

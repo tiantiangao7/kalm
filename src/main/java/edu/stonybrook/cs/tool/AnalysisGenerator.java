@@ -16,8 +16,8 @@ import main.java.edu.stonybrook.cs.thread.BabelNetShareResource;
 import main.java.edu.stonybrook.cs.util.BabelNetConnector;
 
 public class AnalysisGenerator {
-	private static String dir = "resources/scores/";
-	private static String inputFileName = "score.txt";
+	private static String dir = "/Users/tiantiangao/Desktop/tmp5/exp1/";
+	private static String inputFileName = "score_batch.txt";
 	private static String outputFileName = "analysis.txt";
 	
 	public static void ReadRawResults()
