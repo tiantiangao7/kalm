@@ -1,20 +1,29 @@
-# Knowledge Acquisition Logic Machine (KALM)
+# Knowledge Authoring Logic Machine (KALM)
 Authors: Tiantian Gao, Paul Fodor, Michael Kifer
 
 # Introduction
-KALM is a high accuracy knowledge acquisition system from Controlled Natural Language (CNL) sentences aimed to be used for decision support. KALM performs deep semantic analysis of CNL sentences by doing standardization of the logical parses obtained from CNLs and taking advantage of the FrameNet semantic relation knowledge base and the BabelNet lexical ontology and semantic network in order to ensure that different sentences that express the same meaning are mapped into the same logical representation.
+The KALM system allows knowledge authoring with the aim of endowing domain experts with tools that would allow them to translate their knowledge into logic by means of a Controlled Natural Language (CNL). We also develop the query service to support question answering based on the authored knowledge. The features of KALM are five-fold:
+* A formal, FrameNet-inspired ontology FrameOnt that formalizes FrameNet frames and integrates linguistic resources from BabelNet to represent the meaning of English sentences.
+* An incrementally-learned semantic parser that disambiguates CNL sentences by mapping semantically equivalent sentences into the same FrameOnt frames and assigns them unique logical representation (ULR). 
+* Explainability: the approach makes it possible to explain both why particular meanings are assigned and also why mistakes were made.
+* A hybrid CNL-based language for authoring queries.
+* Both knowledge authoring and question answering parts achieve superior accuracy.
+
+# Academic papers (high-level description of the system)
+1. Knowledge Authoring for Rule-Based Reasoning. Tiantian Gao, Paul Fodor, Michael Kifer. ODBASE, OTM Conferences 2018: 461-480.  https://github.com/tiantiangao7/kalm/blob/master/docs/KALM_ODBASE18.pdf
+2. High Accuracy Question Answering via Hybrid Controlled Natural Language. Tiantian Gao, Paul Fodor, Michael Kifer. Web Intelligence (WI), 2018. https://github.com/tiantiangao7/kalm/blob/master/docs/QA_WI18.pdf
 
 # Requirements
-1. Java 1.8
+1. Java JRE 1.8 or later (https://www.java.com/en/download/)
 2. XSB Prolog (http://xsb.sourceforge.net/)
-3. XSB Prolog version of ACE Parsing Engine (APE) under LGPL licence (included in this repository)
+3. XSB Prolog version of Attempto Controlled English (ACE http://attempto.ifi.uzh.ch/site/) Parsing Engine (APE) under LGPL licence (included in this repository)
 4. APE Clex under GPL licence (http://attempto.ifi.uzh.ch/site/downloads/files/)
 5. BabelNet 3.7.1 Java API. (http://babelnet.org/download)
 6. BabelNet 3.7 indices (http://babelnet.org/download)
 
 # Installation
-1. BabelNet 3.7 indices. User must request access from http://babelnet.org/download.
-2. XSB Prolog.
+1. BabelNet 3.7 indices. User must request access from http://babelnet.org/download. The license of BabelNet 3.7 indices applies.
+2. XSB Prolog (http://xsb.sourceforge.net/). The license of XSB Prolog is GNU Library or Lesser General Public License version 2.0 (LGPLv2).
 
 # Code
 * `src/` Java source code for UI, semantic score computation, meta data deserialization for frame property/semantic link override/semantic score parameters/candidate parse results.
@@ -35,3 +44,6 @@ KALM is a high accuracy knowledge acquisition system from Controlled Natural Lan
 # Run
 1. GUI: `./start.sh`
 2. Bach Mode (Read sentences from file and serialize the frame extraction results into file): `./runbatch.sh`
+
+# License
+The license of the KALM code is BSD 3-Clause License.
