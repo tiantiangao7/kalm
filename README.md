@@ -48,8 +48,15 @@ The KALM system allows knowledge authoring with the aim of endowing domain exper
 # How to add a new frame?
 1. open `resources/frame_property/frame_property.txt`
 2. Add a new frame at the end of the line. e.g., 
-   fp('Growing_food',[property('Grower',['bn:00046516n']),property('Food',['bn:00035650n','bn:00035649n'])]). 
+   `fp('Growing_food',[property('Grower',['bn:00046516n']),property('Food',['bn:00035650n','bn:00035649n'])]).` 
 
+# How to add compose an annotated sentence and learn a new lvp?
+```
+cd scripts/prolog/ape
+xsb
+?-['mk.pl'].
+?-annotate_sentence('Mary has a job at IBM in London.',1/4,'Being_employed',[pair('Employee',1/1,required),pair('Position',1/4,required),pair('Employer',1/6,optional),pair('Place',1/8,optional)],[],LVP).
+```
 
 # Run
 1. GUI: `./start.sh`
