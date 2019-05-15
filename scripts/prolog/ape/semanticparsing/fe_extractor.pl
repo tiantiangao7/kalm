@@ -87,6 +87,10 @@ extract_fe_from_logical_syntactic_pattern(DRSFacts,TargetIndex,Logical_Syntactic
      ->
      PredicateNameResult = named
      ;
+     FEPredicate =.. [PredicateName,_,FE,string|_]
+     ->
+     PredicateNameResult = named
+     ;
      FEPredicate =.. [PredicateName,_,FE|_],
      PredicateNameResult = PredicateName
     ).    

@@ -1,6 +1,11 @@
 is_valid_strict_fe_val('Age',X) :- integer(X).
 is_valid_strict_fe_val('Time',X) :- integer(X).
 is_valid_strict_fe_val('Time',when).
+is_valid_strict_fe_val('Release Year',X) :- integer(X).
+is_valid_strict_fe_val('Release Year',when).
+is_valid_strict_fe_val('Release Year',year).
+is_valid_strict_fe_val('Release Year','release-year').
+is_valid_strict_fe_val('Release Year','release-date').
 is_valid_strict_fe_val('Gender','male').
 is_valid_strict_fe_val('Gender','female').
 is_valid_strict_fe_val('Religion','christian').
@@ -18,6 +23,7 @@ strict_filtered_fe_name('Age').
 strict_filtered_fe_name('Gender').
 strict_filtered_fe_name('Religion').
 strict_filtered_fe_name('Time').
+strict_filtered_fe_name('Release Year').
 strict_filtered_fe_name('Money').
 strict_filtered_fe_name('Price').
 

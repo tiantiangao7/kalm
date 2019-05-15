@@ -2,8 +2,10 @@
 :- import numbervars/1 from num_vars.
 
 extract_frame_and_serialize(SentenceID) :-
-    open('tmp/query_output.txt',write,Stream),
+    open('tmp\\query_output.txt',write,Stream),
     close(Stream),
+    open('metaqa\\metaqa_query.txt',write,Stream2),
+    close(Stream2),
     findall(Predicate-SentenceID/WordID,serialized_drs_fact(Predicate,SentenceID/WordID),DRSFacts),
     numbervars(DRSFacts),
     drs_facts_to_index_list(DRSFacts,DRSIndexList),
@@ -11,7 +13,13 @@ extract_frame_and_serialize(SentenceID) :-
     remove_subsumed_frame(FrameList,FrameList2),
     reverse(FrameList2,FrameList3),
     remove_subsumed_frame(FrameList3,FrameList4),
-    framelist_to_text(FrameList4,DRSFacts).
+    %filter_metaqa_frame_list(FrameList4,FrameList5),
+    %framelist_to_metaqa_query(FrameList5,DRSFacts),
+    % Note we output all of the frame parsing results. 
+    % Since there is no MetaQA frame for role-filler disambiguiation,
+    % you may want to remove the MetaQA frames from output when consider
+    % the role-filler disambiguiation procedure.
+	framelist_to_text(FrameList4,DRSFacts).
 
 drs_facts_to_index_list([_-Index|Rest],[Index|RestIndex]) :-
     drs_facts_to_index_list(Rest,RestIndex).
@@ -28,7 +36,7 @@ extract_frame_word_by_word(_,[],[]).
 framelist_to_text([],_).
 
 framelist_to_text([Frame|Rest],DRSFacts) :-
-    open('tmp/query_output.txt',append,Stream),
+    open('tmp\\query_output.txt',append,Stream),
     framelist_to_text_helper(Stream,[Frame|Rest],DRSFacts),
     close(Stream).
 
@@ -41,7 +49,7 @@ framelist_to_text_helper(Stream,[frame_tuple(FrameName,FEList)|Rest],DRSFacts) :
 framelist_to_text_helper(_,[],_).
 
 clear_query_output :- 
-    open('tmp/query_output.txt',write,Stream),
+    open('tmp\\query_output.txt',write,Stream),
     close(Stream).
 
 felist_to_text(Stream,[pair(FEName,FE,Index,PredicateName)|Rest],DRSFacts) :-

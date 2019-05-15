@@ -105,7 +105,12 @@
 
 acetext_to_drs(Text, Sentences, SyntaxTrees, Drs, Messages,CorefList) :-
 	acetext_to_drs(Text, off, off, Sentences, SyntaxTrees, Drs2, Messages, _, CorefList),
-	Drs2 = drs(Refs,Conditions),
+	(Drs2 = drs([],[question(drs(Refs,Conditions))])
+	 ->
+	 true
+	 ;
+	 Drs2 = drs(Refs,Conditions)
+	),
 	reconstruct_object(Conditions,Conditions2),
 	Drs = drs(Refs,Conditions2).
 

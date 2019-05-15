@@ -1,1 +1,1 @@
-?-extract_frame_and_serialize(1).
+extract_frame_and_serialize_main :- extract_frame_and_serialize(1).

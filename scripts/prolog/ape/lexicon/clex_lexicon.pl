@@ -16541,6 +16541,8 @@ clex_iv_finsg(lisps, lisp).
 clex_iv_finsg(listens, listen).
 clex_iv_finsg(litigates, litigate).
 clex_iv_finsg(litters, litter).
+clex_iv_finsg(stars, star).
+clex_iv_finsg(releases, release).
 clex_iv_finsg(lives, live).
 clex_iv_finsg(loads, load).
 clex_iv_finsg(loafs, loaf).
@@ -19776,6 +19778,8 @@ clex_iv_infpl(lisp, lisp).
 clex_iv_infpl(listen, listen).
 clex_iv_infpl(litigate, litigate).
 clex_iv_infpl(litter, litter).
+clex_iv_infpl(star, star).
+clex_iv_infpl(release, release).
 clex_iv_infpl(live, live).
 clex_iv_infpl(load, load).
 clex_iv_infpl(loaf, loaf).
@@ -43091,6 +43095,7 @@ clex_noun_pl(scrimshankers, scrimshanker, human).
 clex_noun_pl(scrips, scrip, neutr).
 clex_noun_pl(scripts, script, neutr).
 clex_noun_pl(scriptures, scripture, neutr).
+clex_noun_pl(screenwriters, screenwriter, human).
 clex_noun_pl(scriptwriters, scriptwriter, human).
 clex_noun_pl(scriveners, scrivener, human).
 clex_noun_pl(scrolls, scroll, neutr).
@@ -43430,6 +43435,7 @@ clex_noun_pl(showmen, showman, human).
 clex_noun_pl(showplaces, showplace, neutr).
 clex_noun_pl(showrooms, showroom, neutr).
 clex_noun_pl(shows, show, neutr).
+clex_noun_pl(screenplays, screenplay, neutr).
 clex_noun_pl(showtimes, showtime, neutr).
 clex_noun_pl(shreds, shred, neutr).
 clex_noun_pl(shrews, shrew, human).
@@ -60519,6 +60525,7 @@ clex_noun_sg(scrimshanker, scrimshanker, human).
 clex_noun_sg(scrip, scrip, neutr).
 clex_noun_sg(script, script, neutr).
 clex_noun_sg(scripture, scripture, neutr).
+clex_noun_sg(screenwriter, screenwriter, human).
 clex_noun_sg(scriptwriter, scriptwriter, human).
 clex_noun_sg(scrivener, scrivener, human).
 clex_noun_sg(scroll, scroll, neutr).
@@ -60845,6 +60852,7 @@ clex_noun_sg(shove, shove, neutr).
 clex_noun_sg(shovel, shovel, neutr).
 clex_noun_sg(shovelful, shovelful, neutr).
 clex_noun_sg(show, show, neutr).
+clex_noun_sg(screenplay, screenplay, neutr).
 clex_noun_sg(showboat, showboat, human).
 clex_noun_sg(showcase, showcase, neutr).
 clex_noun_sg(showdown, showdown, neutr).
@@ -80092,6 +80100,7 @@ clex_tv_finsg(wrests, wrest).
 clex_tv_finsg(wriggles, wriggle).
 clex_tv_finsg(wrings, wring).
 clex_tv_finsg(wrinkles, wrinkle).
+clex_tv_finsg('co-writes', 'co-write').
 clex_tv_finsg(writes, write).
 clex_tv_finsg(wrongs, wrong).
 clex_tv_finsg(yanks, yank).
@@ -91676,6 +91685,7 @@ clex_tv_infpl(wrestle, wrestle).
 clex_tv_infpl(wriggle, wriggle).
 clex_tv_infpl(wring, wring).
 clex_tv_infpl(wrinkle, wrinkle).
+clex_tv_infpl('co-write', 'co-write').
 clex_tv_infpl(write, write).
 clex_tv_infpl(wrong, wrong).
 clex_tv_infpl(yank, yank).

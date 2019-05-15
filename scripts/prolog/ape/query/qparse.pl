@@ -1,1 +1,1 @@
-?-parse_and_serialize('Mary is a female.').
+parse_and_serialize_main :- parse_and_serialize('Titanic is released in 1990.').

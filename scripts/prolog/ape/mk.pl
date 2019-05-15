@@ -41,6 +41,12 @@
 :- ensure_loaded('semanticparsing/drs_to_babelfy_input.pl').
 :- ensure_loaded('semanticparsing/parse_and_serialize.pl').
 :- ensure_loaded('semanticparsing/extract_frame_and_serialize.pl').
+:- ensure_loaded('metaqa/metaqa_frame_to_query.pl').
+
 :- ensure_loaded('query/qparse.pl').
+:- parse_and_serialize_main.
+
 :- ensure_loaded('tmp/serialized_drs_fact.pl').
+
 :- ensure_loaded('query/qframe_extraction.pl').
+:- extract_frame_and_serialize_main.
