@@ -13,17 +13,17 @@ The KALM system allows knowledge authoring with the aim of endowing domain exper
 1. Knowledge Authoring for Rule-Based Reasoning. Tiantian Gao, Paul Fodor, Michael Kifer. ODBASE, OTM Conferences 2018: 461-480.  https://github.com/tiantiangao7/kalm/blob/master/docs/KALM_ODBASE18.pdf
 2. High Accuracy Question Answering via Hybrid Controlled Natural Language. Tiantian Gao, Paul Fodor, Michael Kifer. Web Intelligence (WI), 2018. https://github.com/tiantiangao7/kalm/blob/master/docs/QA_WI18.pdf
 
-# Requirements
-1. Java JRE 1.8 or later (https://www.java.com/en/download/)
-2. XSB Prolog (http://xsb.sourceforge.net/)
-3. XSB Prolog version of Attempto Controlled English (ACE http://attempto.ifi.uzh.ch/site/) Parsing Engine (APE) under LGPL licence (included in this repository)
-4. APE Clex under GPL licence (http://attempto.ifi.uzh.ch/site/downloads/files/)
+# Dependencies
+1. Java JRE 1.8 (https://www.java.com/en/download/)
+2. XSB Prolog Version 3.7 (http://xsb.sourceforge.net/)
+3. XSB Prolog version of Attempto Parsing Engine (APE) under LGPL licence (included in this repository)
+4. APE Clex under GPL licence (http://attempto.ifi.uzh.ch/site/downloads/files/) (included in this repository)
 5. BabelNet 3.7.1 Java API. (http://babelnet.org/download)
 6. BabelNet 3.7 indices (http://babelnet.org/download)
 
 # Installation
 1. BabelNet 3.7 indices. User must request access from http://babelnet.org/download. The license of BabelNet 3.7 indices applies.
-2. XSB Prolog (http://xsb.sourceforge.net/). The license of XSB Prolog is GNU Library or Lesser General Public License version 2.0 (LGPLv2).
+2. XSB Prolog Version 3.7 (http://xsb.sourceforge.net/). The license of XSB Prolog is GNU Library or Lesser General Public License version 2.0 (LGPLv2).
 
 # Code
 * `src/` Java source code for UI, semantic score computation, meta data deserialization for frame property/semantic link override/semantic score parameters/candidate parse results.
