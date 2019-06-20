@@ -9,6 +9,8 @@ The KALM system allows knowledge authoring with the aim of endowing domain exper
 * A hybrid CNL-based language for authoring queries.
 * Both knowledge authoring and question answering parts achieve superior accuracy.
 
+KALM-QA (https://github.com/tiantiangao7/kalm-qa) is the question answering part of KALM.
+
 # Academic papers (high-level description of the system)
 1. Knowledge Authoring for Rule-Based Reasoning. Tiantian Gao, Paul Fodor, Michael Kifer. ODBASE, OTM Conferences 2018: 461-480.  https://github.com/tiantiangao7/kalm/blob/master/docs/KALM_ODBASE18.pdf
 2. High Accuracy Question Answering via Hybrid Controlled Natural Language. Tiantian Gao, Paul Fodor, Michael Kifer. Web Intelligence (WI), 2018. https://github.com/tiantiangao7/kalm/blob/master/docs/QA_WI18.pdf
