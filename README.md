@@ -64,7 +64,7 @@ xsb
 1. Command line: `./start.sh`
 2. Start from Eclipse (recommended).
 
-# How to un the batch mode for testing?
+# How to run the batch mode for testing?
 1. Command line: `./runbatch.sh`
 In batch mode, the program read sentences from file and then serialize the frame extraction results.
 
