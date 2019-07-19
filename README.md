@@ -1,7 +1,6 @@
 # Knowledge Authoring Logic Machine (KALM)
 Authors: Tiantian Gao, Paul Fodor, Michael Kifer
 
-# Introduction
 The KALM system allows knowledge authoring with the aim of endowing domain experts with tools that would allow them to translate their knowledge into logic by means of a Controlled Natural Language (CNL). We also develop the query service to support question answering based on the authored knowledge. The features of KALM are five-fold:
 * A formal, FrameNet-inspired ontology FrameOnt that formalizes FrameNet frames and integrates linguistic resources from BabelNet to represent the meaning of English sentences.
 * An incrementally-learned semantic parser that disambiguates CNL sentences by mapping semantically equivalent sentences into the same FrameOnt frames and assigns them unique logical representation (ULR). 
